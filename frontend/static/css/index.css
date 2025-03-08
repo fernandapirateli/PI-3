@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open sans", sans-serif;
+}
+
+:root{
+    --base-font-size: 1rem;
+}
+
+body{
+    background-color: #eded;
+}
+
+button{
+    background-color: #005892d1;
+    border-radius: 10px ;
+    color: #fff;
+    
+    width: 180px;
+    height: 50px;
+    font-weight: bold;
+    border: 1px #c0b6b6;
+    margin: 10px;
+   
+
+}
+button[disabled]{
+    background-color: #9a7f7f;
+}
+
+button:hover{
+    
+    border-radius: 10px ;
+    
+    font-family: "Open sans";
+    font-weight: bold;
+    border: 7px #080404;
+    margin: 10px;
+   
+
+}
+form{
+    display: flex;
+    font-family: sans-serif;
+    font-size: 1.3em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 550px;
+    background-color: #fff;
+    border-radius:5px 5px ;
+    padding:0 40px ;
+    
+}
+label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    width: 80vw;
+    max-width: 500px;
+    font-size: calc(0.8 * var(--base-font-size));
+
+}
+
+
+
+
+input::placeholder{
+    font-size: calc(0.8 * var(--base-font-size));
+
+}
+
+input{
+    font-size: calc(0.8 * var(--base-font-size));
+    border: none;
+    border-bottom:1px solid #000;
+    margin:10px;
+    width: 90%;
+}
+select{
+    width: 90%;
+}
+
+
+input:focus{
+    
+    outline: none;
+    border-bottom: 2px solid #0048c4;
+   
+}
+
+
+

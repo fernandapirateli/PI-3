@@ -11,3 +11,7 @@ Webservice de contagem de calorias e macronutrientes.
 
 ### Execução
 * Estando na pasta raiz, executar no terminal o comando ``python backend/manage.py``
+
+### Dependências
+* Framework Django: https://pypi.org/project/Django/
+* Biblioteca Environ: https://pypi.org/project/python-environ/
