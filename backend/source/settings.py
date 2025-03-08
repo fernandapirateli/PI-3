@@ -92,6 +92,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # usar somente em produção
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [Path(BASE_DIR).joinpath('../frontend/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
