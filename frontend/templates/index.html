@@ -1,16 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <section class="container">
-        <section class="contrast-section">
-            <div class="container">
-                <h4>Bem Vindo à página inicial</h4>
+<div class="container_home">
+    <h1>Bem-vindo ao site de nutrição Calokids</h1>
+    <p class="info">
+        Projeto com propósito de auxiliar no acompanhamento da alimentação infantil.
+    </p>
+    <div class="container_card">
+        <div class="card_sheet">
+            <img src="{% static 'img/didi.jpg' %}" alt="Didi">
+            <div class="article_card">
+                <h3>Alimentação saudável desde cedo</h3>
+                <article>
+                    <p>Energia para brincar e aprender</p>
+                </article>
             </div>
-        </section>   
-        <section class="contrast-section">
-            <div class="container">
-                <h4>Aviso: somente teste</h4>
-                <p>Site em adaptação e desenvolvimento.</p>
+        </div>
+        <div class="card_sheet">
+            <img src="{% static 'img/pao.jpg' %}" alt="Pão">
+            <div class="article_card">
+                <h3>CaloKids</h3>
+                <article>
+                    <p>Alimentação Consciente, Infância Saudável</p>
+                </article>
             </div>
-        </section>
-    </section>
+        </div>
+        <div class="card_sheet">
+            <img src="{% static 'img/menino.jpg' %}" alt="Menino">
+            <div class="article_card">
+                <h3>Incentivando a alimentação</h3>
+                <article>
+                    <p>Balanceada nas escolas.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <p></p>
+</div>
 {% endblock %}
