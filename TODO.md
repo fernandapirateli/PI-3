@@ -1,5 +1,11 @@
 # TODO List
 
+**Instrução:** A cada tarefa concluída, insira um `x` entre os colchetes (`[ ]`).  
+Exemplo:  
+- [x] Tarefa concluída  
+- [ ] Tarefa pendente
+
+
 ## Adaptação do Projeto para Django
 - [x] Adaptar base do projeto para Django
 - [ ] Avaliar caso de uso para consumir API
