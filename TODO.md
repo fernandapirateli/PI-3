@@ -13,7 +13,7 @@ Exemplo:
 ## Apps do Backend
 
 ### App: Users
-- [ ] Modelo
+- [x] Modelo
 - [ ] Visão
   - [x] Home
   - [ ] Registrar
