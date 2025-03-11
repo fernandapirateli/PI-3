@@ -16,7 +16,7 @@ Exemplo:
 - [x] Modelo
 - [ ] Visão
   - [x] Home
-  - [ ] Registrar
+  - [x] Registrar
   - [ ] Editar
   - [ ] Login
   - [ ] Logout

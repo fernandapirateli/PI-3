@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="container">
+        <div class="div-area">
+            <form class="form-area" method="POST">
+                {% csrf_token %}
+                <h1>Cadastro</h1>
+                <hr width="100%" />
+                <p>Para efetuar o cadastro, digite os seus dados nos campos abaixo.</p>
+                <label for="first_name">Primeiro nome</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Ex.: Helen" required autofocus>
+                <br>
+                <label for="cpf" >CPF</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Ex.: 000.111.222-33" required autofocus>
+                <br>
+                <label for="user_type" >Tipo de Usuário</label>
+                <input type="text" id="user_type" name="user_type" placeholder="Ex.: Professor(a)" required autofocus>
+                <br>
+                <label for="password">Inserir senha</label>
+                <input type="password" id="password1" name="password" placeholder="Digite sua senha" required>
+                <label for="password2">Confirmar senha</label>
+                <input type="password" id="password2" name="password2" placeholder="Repita a senha" disabled>
+                <input type="submit" value="Registrar" class="btn">
+            </form>
+        </div>
+    </section>
+{% endblock %}
