@@ -5,14 +5,14 @@ User = auth.get_user_model()
 
 
 def index(request):
+    contexto = {'login': False}
     if request.user.is_authenticated:
         contexto = {
             'first_name': request.user.first_name,
             'user_type': request.user.user_type,
+            'login': True,
         }
-        return render(request, 'index.html', contexto)
-    else:
-        return render(request, 'index.html')
+    return render(request, 'index.html', contexto)
 
 
 def registrar(request):
@@ -34,7 +34,29 @@ def registrar(request):
             )
             user.save()
             print(f'Usuário(a) {first_name} cadastrado(a) com sucesso')
-            return redirect('index')
+            return redirect('logar')
     else:
         return render(request, 'registrar.html')
 
+
+def logar(request):
+    if request.method == 'POST':
+        cpf = request.POST.get('cpf')
+        password = request.POST.get('password')
+
+        if User.objects.filter(username=cpf).exists():
+            user = auth.authenticate(request, username=cpf, password=password)
+
+            if user is not None:
+                auth.login(request, user)
+                print(f'Usuário {user.first_name} logado.')
+                return redirect('index')
+        else:
+            print('CPF ou senha inválidos')
+    return render(request, 'logar.html')
+
+
+def logout(request):
+    auth.logout(request)
+    contexto = {'login': False}
+    return render(request, 'index.html', contexto)

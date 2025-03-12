@@ -14,13 +14,13 @@ Exemplo:
 
 ### App: Users
 - [x] Modelo
-- [ ] Visão
+- [x] Visão
   - [x] Home
   - [x] Registrar
-  - [ ] Editar
-  - [ ] Login
-  - [ ] Logout
-- [ ] Rotas
+  - [ ] ~~Editar~~
+  - [x] Login
+  - [x] Logout
+- [x] Rotas
 - [ ] Testes
 
 ### App: Alimentos

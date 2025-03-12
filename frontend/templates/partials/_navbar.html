@@ -1,8 +1,18 @@
 <div class="App">
     <a href="/">Home</a>
-    <a href="registrar">Registrar</a>
-    <a href="">Login</a>
-    <a hidden href="">Calculadora</a>
-    <a hidden href="">Perfil</a>
-    <a hidden href="">Conteúdo</a>
+    {% if login == False %}
+        <a href="registrar">Registrar</a>
+        <a href="logar">Logar</a>
+    {% endif %}
+    {% if login == True %}
+        <a href="">Calculadora</a>
+        <a href="">Conteúdo</a>
+        <a hidden href="">Perfil</a>
+        <a href="logout">Logout</a>
+    {% endif %}
+</div>
+<div class="">
+    {% if login == True %}
+    <p>{{user_type}} | {{first_name}}</p>
+    {% endif %}
 </div>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="container">
+        <div class="div-area">
+            <form class="form-area" method="POST">
+                {% csrf_token %}
+                <h1>Login</h1>
+                <hr width="100%" />
+                <label for="cpf" >CPF</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Ex.: 00011122233" required autofocus>
+                <br>
+                <label for="password">Inserir senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                <input type="submit" value="Logar" class="btn">
+            </form>
+        </div>
+    </section>
+{% endblock %}
