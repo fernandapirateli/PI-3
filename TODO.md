@@ -21,7 +21,8 @@ Exemplo:
   - [x] Login
   - [x] Logout
 - [x] Rotas
-- [ ] Testes
+- [x] Testes unitários
+- [ ] Docstrings
 
 ### App: Alimentos
 - [ ] Modelo
@@ -32,8 +33,9 @@ Exemplo:
   - [ ] Listar
   - [ ] Somar calorias
 - [ ] Rotas
-- [ ] Testes
-
+- [ ] Testes unitários
+- [ ] Docstrings
+- 
 ### App: Alunos
 - [ ] Modelo
 - [ ] Visão
@@ -42,9 +44,10 @@ Exemplo:
   - [ ] Remover
   - [ ] Listar
 - [ ] Rotas
-- [ ] Testes
-
-### App: Receitas
+- [ ] Testes unitários
+- [ ] Docstrings
+- 
+### App: Cardápio
 - [ ] Modelo
 - [ ] Visão
   - [ ] Registrar
@@ -52,8 +55,9 @@ Exemplo:
   - [ ] Remover
   - [ ] Listar
 - [ ] Rotas
-- [ ] Testes
-
+- [ ] Testes unitários
+- [ ] Docstrings
+- 
 ## Frontend
 
 ### App: Users
@@ -83,10 +87,11 @@ Exemplo:
 ## Melhorias Gerais
 - [ ] Frontend: Responsividade
   - [ ] Ajustar layout para mobile
-  - [ ] Testar em diferentes dispositivos
+  - [ ] Testar em diferentes dispositivos  
 - [ ] Frontend: Acessibilidade
   - [ ] Alterar tamanho de fonte, com espaçamento adequado
   - [ ] Verificar contraste de cores
   - [ ] Testar com leitores de tela
+- [ ] Frontend: Testes unitários
 - [ ] Nova conexão com banco de dados (externo ou local)
 - [ ] Garantir a documentação do projeto
