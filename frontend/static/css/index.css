@@ -11,7 +11,10 @@
 }
 
 body{
-    background-color: #eded;
+    margin: 0; /* Remove todas as margens padrão do body */
+    font-family: sans-serif;
+    background-color: #E6D8E8;
+    padding-top: 60px; /* Adiciona um padding-top para compensar a altura do header fixo (ajuste conforme necessário) */
 }
 
 button{
@@ -65,9 +68,14 @@ label {
     width: 80vw;
     max-width: 500px;
     font-size: calc(0.8 * var(--base-font-size));
+    margin-right: auto;
+    margin-bottom: 2px;
+    color: #555;
+    font-family: "Open sans", sans-serif;
+    line-height: 1.0; /* Reduz o espaçamento entre linhas */
+
 
 }
-
 
 
 
@@ -95,5 +103,172 @@ input:focus{
    
 }
 
+.container_card {
+    display: flex;
+    justify-content: space-around;
+    width: 1200px;
+    margin: 10px auto;
+}
 
+.card_sheet {
+    text-align: center;
+    margin: 0;
+}
+
+img {
+    width: 335px;
+    height: 335px;
+    object-fit: cover;
+    display: block;
+    margin: 0 0 10px;
+    border-radius: 15px;
+}
+
+
+
+h1 {
+    margin: 20px auto 10px; /* Ajusta a margem superior para compensar o header fixo */
+    max-width: 800px;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+h3:first-of-type {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+p:last-of-type {
+    font-size: 16px;
+    margin: 0;
+}
+
+p {
+    margin: 20px auto 10px; /* Ajusta a margem superior para compensar o header fixo */
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 6px;
+    line-height: 1,4;
+
+}
+
+
+
+footer {
+    display: flex;
+    justify-content: space-around;
+   
+}
+
+.info {
+    margin: 10px auto;
+    max-width: 1000px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: justify;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.App {
+    margin: 0;
+    padding-top: 60px;
+    font-family: sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #d17a17;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.logo {
+    float: right;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 5px;
+    object-fit: contain;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    margin: 0;
+    overflow: hidden; /* Impede a barra de rolagem */
+}
+
+
+
+input[type="text"],
+input[type="password"],
+select {
+    width: calc(100% - 12px);
+    padding: 5px;
+    margin-bottom: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: "Open sans", sans-serif;
+    line-height: 1.0; /* Reduz o espaçamento entre linhas */
+    
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+select {
+    height: 20px;
+    font-family: "Open sans", sans-serif;
+}
 
