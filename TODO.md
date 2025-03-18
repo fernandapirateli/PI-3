@@ -24,6 +24,18 @@ Exemplo:
 - [x] Testes unitários
 - [ ] Docstrings
 
+### App: Alunos
+- [x] Modelo Aluno
+- [x] Modelo Turma
+- [ ] Visão
+  - [ ] Registrar
+  - [ ] Editar
+  - [ ] Remover
+  - [ ] Listar
+- [ ] Rotas
+- [ ] Testes unitários
+- [ ] Docstrings
+
 ### App: Alimentos
 - [ ] Modelo
 - [ ] Visão
@@ -31,22 +43,11 @@ Exemplo:
   - [ ] Editar
   - [ ] Remover
   - [ ] Listar
-  - [ ] Somar calorias
+  - [ ] <font style='color : red'>Somar calorias</font>
 - [ ] Rotas
 - [ ] Testes unitários
 - [ ] Docstrings
-- 
-### App: Alunos
-- [ ] Modelo
-- [ ] Visão
-  - [ ] Registrar
-  - [ ] Editar
-  - [ ] Remover
-  - [ ] Listar
-- [ ] Rotas
-- [ ] Testes unitários
-- [ ] Docstrings
-- 
+
 ### App: Cardápio
 - [ ] Modelo
 - [ ] Visão
@@ -54,10 +55,11 @@ Exemplo:
   - [ ] Editar
   - [ ] Remover
   - [ ] Listar
+  - [ ] <font style='color : magenta'>Total calorias</font>  
 - [ ] Rotas
 - [ ] Testes unitários
 - [ ] Docstrings
-- 
+
 ## Frontend
 
 ### App: Users
@@ -66,19 +68,19 @@ Exemplo:
 - [ ] JavaScript
 - [ ] Imagens
 
-### App: Alimentos
-- [ ] HTML
-- [ ] CSS
-- [ ] JavaScript
-- [ ] Imagens
-
 ### App: Alunos
 - [ ] HTML
 - [ ] CSS
 - [ ] JavaScript
 - [ ] Imagens
 
-### App: Receitas
+### App: Alimentos
+- [ ] HTML
+- [ ] CSS
+- [ ] JavaScript
+- [ ] Imagens
+
+### App: Cardápio
 - [ ] HTML
 - [ ] CSS
 - [ ] JavaScript
@@ -94,4 +96,4 @@ Exemplo:
   - [ ] Testar com leitores de tela
 - [ ] Frontend: Testes unitários
 - [ ] Nova conexão com banco de dados (externo ou local)
-- [ ] Garantir a documentação do projeto
+- [ ] Garantir um projeto bem documentado
