@@ -1,4 +1,21 @@
-{% extends 'base.html' %}
+
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/index.css' %}" >
+
+<div class="App">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
+        </div>            
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="registrar">Registrar</a></li>
+            <li><a href="logar">Logar</a></li>
+        </ul>
+    </nav>
+</div>
+
+
 {% block content %}
     <section class="container">
         <div class="div-area">
