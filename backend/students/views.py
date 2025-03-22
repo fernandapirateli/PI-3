@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import Student, Group
-from django.http import HttpResponse
 
 
 def registrar_turma(group_name):
@@ -37,9 +36,16 @@ def registrar_aluno(request):
             print(f'Aluno(a) {student_name} cadastrado(a) com sucesso na turma {group.group_name}')
             return redirect('perfil')
     else:
+        contexto = {'login': False}
         if request.user.is_authenticated:
-            return render(request, 'students/registrar_aluno.html')
+            if request.user.is_authenticated:
+                contexto = {
+                    'first_name': request.user.first_name,
+                    'user_type': request.user.user_type,
+                    'login': True,
+                }
+            return render(request, 'students/registrar_aluno.html', contexto)
         else:
-            return HttpResponse(status=400)
+            return redirect('index', contexto)
 
 

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.http import HttpResponse
 
 User = auth.get_user_model()
 
@@ -17,10 +16,16 @@ def index(request):
 
 
 def perfil(request):
+    contexto = {'login': False}
     if request.user.is_authenticated:
-        return render(request, 'users/profile.html')
+        contexto = {
+            'first_name': request.user.first_name,
+            'user_type': request.user.user_type,
+            'login': True,
+        }
+        return render(request, 'users/profile.html', contexto)
     else:
-        return HttpResponse(status=400)
+        return redirect('index', contexto)
 
 
 def registrar(request):
@@ -44,7 +49,7 @@ def registrar(request):
             print(f'Usuário(a) {first_name} cadastrado(a) com sucesso')
             return redirect('logar')
     else:
-        return render(request, 'registrar.html')
+        return render(request, 'users/registrar.html')
 
 
 def logar(request):
@@ -61,7 +66,7 @@ def logar(request):
                 return redirect('index')
         else:
             print('CPF ou senha inválidos')
-    return render(request, 'logar.html')
+    return render(request, 'users/logar.html')
 
 
 def logout(request):
