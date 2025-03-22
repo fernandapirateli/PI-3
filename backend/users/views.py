@@ -2,27 +2,27 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 
 User = auth.get_user_model()
+GLOBAL_LOGIN = False
+
+
+def gerir_contexto(request):
+    global GLOBAL_LOGIN
+
+    contexto = {'login': GLOBAL_LOGIN}
+    if request.user.is_authenticated:
+        contexto['first_name'] = request.user.first_name
+        contexto['user_type'] = request.user.user_type
+    return contexto
 
 
 def index(request):
-    contexto = {'login': False}
-    if request.user.is_authenticated:
-        contexto = {
-            'first_name': request.user.first_name,
-            'user_type': request.user.user_type,
-            'login': True,
-        }
+    contexto = gerir_contexto(request)
     return render(request, 'index.html', contexto)
 
 
 def perfil(request):
-    contexto = {'login': False}
-    if request.user.is_authenticated:
-        contexto = {
-            'first_name': request.user.first_name,
-            'user_type': request.user.user_type,
-            'login': True,
-        }
+    contexto = gerir_contexto(request)
+    if contexto['login']:
         return render(request, 'users/profile.html', contexto)
     else:
         return redirect('index', contexto)
@@ -53,6 +53,8 @@ def registrar(request):
 
 
 def logar(request):
+    global GLOBAL_LOGIN
+
     if request.method == 'POST':
         cpf = request.POST.get('cpf')
         password = request.POST.get('password')
@@ -62,6 +64,7 @@ def logar(request):
 
             if user is not None:
                 auth.login(request, user)
+                GLOBAL_LOGIN = True
                 print(f'Usuário {user.first_name} logado.')
                 return redirect('index')
         else:
@@ -70,6 +73,9 @@ def logar(request):
 
 
 def logout(request):
+    global GLOBAL_LOGIN
+
     auth.logout(request)
-    contexto = {'login': False}
+    GLOBAL_LOGIN = False
+    contexto = {'login': GLOBAL_LOGIN}
     return render(request, 'index.html', contexto)

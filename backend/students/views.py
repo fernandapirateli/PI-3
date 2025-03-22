@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Student, Group
+from users.views import gerir_contexto
 
 
 def registrar_turma(group_name):
@@ -36,16 +37,12 @@ def registrar_aluno(request):
             print(f'Aluno(a) {student_name} cadastrado(a) com sucesso na turma {group.group_name}')
             return redirect('perfil')
     else:
-        contexto = {'login': False}
+        contexto = gerir_contexto(request)
         if request.user.is_authenticated:
-            if request.user.is_authenticated:
-                contexto = {
-                    'first_name': request.user.first_name,
-                    'user_type': request.user.user_type,
-                    'login': True,
-                }
             return render(request, 'students/registrar_aluno.html', contexto)
         else:
             return redirect('index', contexto)
+
+
 
 

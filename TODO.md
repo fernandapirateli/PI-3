@@ -24,11 +24,11 @@ Exemplo:
 - [x] Testes unitários
 - [ ] Docstrings
 
-### App: Alunos
+### App: Alunos/Turma
 - [x] Modelo Aluno
 - [x] Modelo Turma
 - [ ] Visão
-  - [ ] Registrar
+  - [x] Registrar
   - [ ] Editar
   - [ ] Remover
   - [ ] Listar
