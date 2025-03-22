@@ -1,6 +1,5 @@
 {% load static %}
 <link rel="stylesheet"  href="{% static 'css/app.css' %}" >
-
 <div class="App">
     {% if login == False %}
         <nav class="navbar">
@@ -8,29 +7,27 @@
                 <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
             </div>            
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
+                <li><a href="/">Início</a></li>
                 <li><a href="registrar">Registrar</a></li>
-                <li><a href="logar">Logar</a></li>
+                <li><a href="logar">Entrar</a></li>
             </ul>
         </nav>
     {% endif %}
-
     {% if login == True %}
         <nav class="navbar">
-            <li><a href="/">Home</a></li>
+            <li><a href="/">Início</a></li>
             <div class="logo">
                 <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
             </div> 
             <ul class="nav-links">
                 <li><a href="">Calculadora</a></li>
                 <li><a href="">Conteúdo</a></li>
-                <li hidden><a href="">Perfil</a></li>
-                <li><a href="logout">Logout</a></li>
+                <li ><a href="perfil">Ações do Perfil</a></li>
+                <li><a href="logout">Sair</a></li>
             </ul>
         </nav>
     {% endif %}
 </div>
-
 <div class="">
     {% if login == True %}
         <p>{{user_type}} | {{first_name}}</p>

@@ -1,0 +1,28 @@
+{% load static %}
+{% block content %}
+    <section class="container">
+        <div class="div-area">
+            <form class="form-area" method="POST">
+                {% csrf_token %}
+                <h1>Cadastrar aluno</h1>
+                <hr width="100%" />
+                <p>Para efetuar o cadastro, digite os seus dados nos campos abaixo.</p>
+                <label for="student_name">Nome completo do aluno</label>
+                <input type="text" id="student_name" name="student_name" placeholder=
+                        "Ex.: Jericó de Mello" required autofocus>
+                <br>
+                <label for="student_ra" >RA</label>
+                <input type="text" id="student_ra" name="student_ra" placeholder="Ex.: 0001112223344-2" required autofocus>
+                <br>
+                <label for="group_name" >Turma</label>
+                <input type="text" id="group_name" name="group_name" placeholder="" required autofocus>
+                <br>
+                <label for="student_diet_restriction" >Restrição alimentar</label>
+                <textarea id="student_diet_restriction" name="student_diet_restriction"
+                       placeholder="Ex.: Lactose; Alfafa"></textarea>
+                <br>
+                <input type="submit" value="Registrar" class="btn">
+            </form>
+        </div>
+    </section>
+{% endblock %}

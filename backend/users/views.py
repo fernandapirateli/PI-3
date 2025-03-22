@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
+from django.http import HttpResponse
 
 User = auth.get_user_model()
 
@@ -13,6 +14,13 @@ def index(request):
             'login': True,
         }
     return render(request, 'index.html', contexto)
+
+
+def perfil(request):
+    if request.user.is_authenticated:
+        return render(request, 'users/profile.html')
+    else:
+        return HttpResponse(status=400)
 
 
 def registrar(request):
