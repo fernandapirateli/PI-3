@@ -4,6 +4,12 @@
     <section class="container">
         <div class="div-area">
             <p>Ações de perfil</p>
+            <form id='form_cadastrar_aluno' action="{% url 'registrar_aluno' %}" method="GET">
+                <button class="btn" type="submit">Cadastrar aluno</button>
+            </form>
+            <form id="form_listar_alunos" action="listar_alunos" method="GET">
+                <button class="btn" type="submit">Listar alunos</button>
+            </form>
             <form id="" action="" method="GET">
                 <button class="btn" type="submit">Não faço nada</button>
             </form>
@@ -15,9 +21,6 @@
             </form>
             <form id="" action="" method="GET">
                 <button class="btn" type="submit">Só de enfeite</button>
-            </form>
-            <form id='form_perfil' action="{% url 'registrar_aluno' %}" method="GET">
-                <button class="btn" type="submit">Cadastrar alunos</button>
             </form>
         </div>
     </section>

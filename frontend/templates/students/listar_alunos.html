@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <div class="div-area">
+        <form class="form-area" id="lista-alunos" method="POST">
+            {% csrf_token %}
+            <h1>Lista de alunos</h1>
+            <hr width="100%" />
+            <label for="">Selecione um aluno para editar ou excluir</label>
+            <div class="lista-alunos">
+            {%for student in lista_alunos%}
+                <ul>
+                    {{student.student_name}} | {{student.student_group}}
+                </ul>
+            {%endfor%}
+            </div>
+        </form>
+        <button class="btn" form="lista-alunos" type="submit" value="editar" disabled>Editar aluno</button>
+        <button class="btn" form="lista-alunos" type="submit" value="excluir" disabled>Excluir aluno</button>
+    </div>
+</section>
+{% endblock %}

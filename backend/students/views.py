@@ -44,5 +44,16 @@ def registrar_aluno(request):
             return redirect('index', contexto)
 
 
+def listar_alunos(request):
+    contexto = gerir_contexto(request)
+    if request.method == 'POST':
+        pass
+    else:
+        if contexto['login']:
+            lista_alunos = Student.objects.order_by('student_name').all()
+            contexto['lista_alunos'] = lista_alunos
+            return render(request, 'students/listar_alunos.html', contexto)
+        else:
+            return redirect('index')
 
 

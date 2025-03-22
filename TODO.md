@@ -31,7 +31,7 @@ Exemplo:
   - [x] Registrar
   - [ ] Editar
   - [ ] Remover
-  - [ ] Listar
+  - [x] Listar
 - [ ] Rotas
 - [ ] Testes unitários
 - [ ] Docstrings
