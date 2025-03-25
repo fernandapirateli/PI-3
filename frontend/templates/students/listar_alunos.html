@@ -3,7 +3,7 @@
 {% block content %}
 <section class="container">
     <div class="div-area">
-        <form class="form-area" id="lista-alunos" method="POST">
+        <div class="form-area" id="lista-alunos">
             {% csrf_token %}
             <h1>Lista de alunos</h1>
             <hr width="100%" />
@@ -11,13 +11,26 @@
             <div class="lista-alunos">
             {%for student in lista_alunos%}
                 <ul>
-                    {{student.student_name}} | {{student.student_group}}
+                    <li>
+                        <a href="{% url 'perfil_aluno' student.id %}">
+                            {{student.student_name}} | {{student.student_group}}
+                        </a>
+                    </li>
                 </ul>
             {%endfor%}
             </div>
+        </div>
+        <form class="form-area" id="pesquisar-aluno" method="POST">
+            {% csrf_token %}
+            <h1>Pesquisar Aluno</h1>
+            <hr width="100%" />
+            <label for="">Forneça o nome ou RA de um aluno</label>
+            <div class="lista-alunos">
+                <input placeholder="N/A" disabled>
+            </div>
+            <input type="submit" class="btn" value="Pesquisar" disabled>
+            <input hidden name="from_listar_alunos" value = True>
         </form>
-        <button class="btn" form="lista-alunos" type="submit" value="editar" disabled>Editar aluno</button>
-        <button class="btn" form="lista-alunos" type="submit" value="excluir" disabled>Excluir aluno</button>
     </div>
 </section>
 {% endblock %}

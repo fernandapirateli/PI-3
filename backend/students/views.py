@@ -38,7 +38,7 @@ def registrar_aluno(request):
             return redirect('perfil')
     else:
         contexto = gerir_contexto(request)
-        if request.user.is_authenticated:
+        if contexto['login']:
             return render(request, 'students/registrar_aluno.html', contexto)
         else:
             return redirect('index', contexto)
@@ -55,5 +55,16 @@ def listar_alunos(request):
             return render(request, 'students/listar_alunos.html', contexto)
         else:
             return redirect('index')
+
+
+def perfil_aluno(request, student_id):
+    contexto = gerir_contexto(request)
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET' and contexto['login']:
+        contexto['student'] = Student.objects.get(pk=student_id)
+        return render(request, 'students/perfil_aluno.html', contexto)
+    else:
+        return redirect('index')
 
 
