@@ -57,12 +57,12 @@ def listar_alunos(request):
             return redirect('index')
 
 
-def perfil_aluno(request, student_id):
-    contexto = gerir_contexto(request)
+def perfil_aluno(request):
     if request.method == 'POST':
-        pass
-    elif request.method == 'GET' and contexto['login']:
+        contexto = gerir_contexto(request)
+        student_id = request.POST.get('student_id')
         contexto['student'] = Student.objects.get(pk=student_id)
+
         return render(request, 'students/perfil_aluno.html', contexto)
     else:
         return redirect('index')

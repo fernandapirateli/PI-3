@@ -9,15 +9,14 @@
             <hr width="100%" />
             <label for="">Selecione um aluno para editar ou excluir</label>
             <div class="lista-alunos">
-            {%for student in lista_alunos%}
-                <ul>
-                    <li>
-                        <a href="{% url 'perfil_aluno' student.id %}">
-                            {{student.student_name}} | {{student.student_group}}
-                        </a>
-                    </li>
-                </ul>
-            {%endfor%}
+                {%for student in lista_alunos%}
+                <form id='list_students_form' action="{% url 'perfil_aluno' %}" method="POST">
+                    {% csrf_token %}
+                    <small>{{student.student_name}} | {{student.student_group}}</small>
+                    <button type="submit" class="btn">&#10551;</button>
+                    <input hidden name="student_id" value="{{student.id}}">
+                </form>
+                {%endfor%}
             </div>
         </div>
         <form class="form-area" id="pesquisar-aluno" method="POST">
@@ -29,7 +28,7 @@
                 <input placeholder="N/A" disabled>
             </div>
             <input type="submit" class="btn" value="Pesquisar" disabled>
-            <input hidden name="from_listar_alunos" value = True>
+            <input hidden name="from_listar_alunos" value=True>
         </form>
     </div>
 </section>

@@ -72,7 +72,7 @@ def logar(request):
     return render(request, 'users/logar.html')
 
 
-def logout(request):
+def deslogar(request):
     global GLOBAL_LOGIN
 
     auth.logout(request)

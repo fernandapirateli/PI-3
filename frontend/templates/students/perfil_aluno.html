@@ -3,25 +3,37 @@
 {% block content %}
 <section class="container">
     <div class="div-area">
-        <form class="form-area" id="edit" action="" method="POST">
+        <form class="form-area" id="details">
             {% csrf_token %}
             <h1>Visualização de Cadastro</h1>
             <hr width="100%" />
             <label for="student_name">Nome do aluno</label>
             <p id="student_name">{{student.student_name}}</p>
             <br>
-            <label for="student_ra" >RA</label>
+            <label for="student_ra">RA</label>
             <p id="student_ra">{{student.student_ra}}</p>
             <br>
-            <label for="group_name" >Turma</label>
+            <label for="group_name">Turma</label>
             <p id="group_name">{{student.group_name}}</p>
             <br>
-            <label for="student_diet_restriction" >Restrição alimentar</label>
+            <label for="student_diet_restriction">Restrição alimentar</label>
             <p id="student_diet_restriction">{{student.student_diet_restriction}}</p>
             <br>
         </form>
-        <button class="btn" form="edit" type="submit" value="editar" disabled>Editar aluno</button>
-        <button class="btn" form="edit" type="submit" value="excluir" disabled>Excluir aluno</button>
+        <form id='form_editar_aluno' action="" method="POST">
+            {% csrf_token %}
+            <input hidden type="text" name="option" value="editar">
+            <input hidden type="text" name="student_id" value={{student.id}}>
+        </form>
+        <form id='form_excluir_aluno' action="" method="POST">
+            {% csrf_token %}
+            <input hidden type="text" name="option" value="excluir">
+            <input hidden type="text" name="student_id" value={{student.id}}>
+        </form>
+        <div class="">
+            <button class="btn" form="form_editar_aluno" type="submit" disabled>Editar aluno</button>
+            <button class="btn" form="form_excluir_aluno" type="submit" disabled>Excluir aluno</button>
+        </div>
     </div>
 </section>
 {% endblock %}
