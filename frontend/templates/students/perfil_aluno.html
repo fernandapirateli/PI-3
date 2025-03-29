@@ -20,19 +20,19 @@
             <p id="student_diet_restriction">{{student.student_diet_restriction}}</p>
             <br>
         </form>
-        <form id='form_editar_aluno' action="{% url 'editar_aluno' %}" method="POST">
+        <form id='form_editar_aluno' action="{% url 'gerir_aluno' %}" method="POST">
             {% csrf_token %}
             <input hidden type="text" name="option" value="editar">
             <input hidden type="text" name="student_id" value={{student.id}}>
         </form>
-        <form id='form_excluir_aluno' action="" method="POST">
+        <form id='form_excluir_aluno' action="{% url 'gerir_aluno' %}" method="POST">
             {% csrf_token %}
             <input hidden type="text" name="option" value="excluir">
             <input hidden type="text" name="student_id" value={{student.id}}>
         </form>
         <div class="">
             <button class="btn" form="form_editar_aluno" type="submit">Editar aluno</button>
-            <button class="btn" form="form_excluir_aluno" type="submit" disabled>Excluir aluno</button>
+            <button class="btn" form="form_excluir_aluno" type="submit">Excluir aluno</button>
         </div>
     </div>
 </section>

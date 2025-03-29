@@ -92,7 +92,7 @@ def perfil_aluno(request):
         return redirect('index')
 
 
-def editar_aluno(request):
+def gerir_aluno(request):
     if request.method == 'POST':
         contexto = gerir_contexto(request)
         option = request.POST.get('option')
@@ -107,4 +107,16 @@ def editar_aluno(request):
             return redirect('listar_alunos')
 
         if option == 'excluir':
-            pass
+            excluir_aluno(student_id)
+            return redirect('listar_alunos')
+
+        if option == 'cancelar':
+            return redirect('listar_alunos')
+
+
+def excluir_aluno(student_id):
+    if Student.objects.filter(pk=student_id).exists():
+        student = Student.objects.get(pk=student_id)
+        name, group = student.student_name, student.student_group
+        student.delete()
+        print(f'O registro do(a) aluno(a) {name}, da turma {group} foi excluído com sucesso')
