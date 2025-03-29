@@ -29,7 +29,7 @@ Exemplo:
 - [x] Modelo Turma
 - [ ] Visão
   - [x] Registrar
-  - [ ] Editar
+  - [x] Editar
   - [ ] Remover
   - [x] Listar
 - [ ] Rotas
