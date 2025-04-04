@@ -22,7 +22,7 @@ Exemplo:
   - [x] Logout
 - [x] Rotas
 - [x] Testes unitários
-- [ ] Docstrings
+- [x] Docstrings
 
 ### App: Alunos/Turma
 - [x] Modelo Aluno
@@ -34,7 +34,7 @@ Exemplo:
   - [x] Listar
 - [x] Rotas
 - [x] Testes unitários
-- [ ] Docstrings
+- [x] Docstrings
 
 ### App: Alimentos
 - [ ] Modelo
