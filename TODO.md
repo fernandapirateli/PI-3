@@ -27,13 +27,13 @@ Exemplo:
 ### App: Alunos/Turma
 - [x] Modelo Aluno
 - [x] Modelo Turma
-- [ ] Visão
+- [x] Visão
   - [x] Registrar
   - [x] Editar
-  - [ ] Remover
+  - [x] Remover
   - [x] Listar
-- [ ] Rotas
-- [ ] Testes unitários
+- [x] Rotas
+- [x] Testes unitários
 - [ ] Docstrings
 
 ### App: Alimentos

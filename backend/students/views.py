@@ -64,7 +64,7 @@ def registrar_aluno(request):
             return render(request, 'students/registrar_aluno.html', contexto)
 
         else:
-            return redirect('index', contexto)
+            return redirect('index')
 
 
 def listar_alunos(request):
