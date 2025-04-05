@@ -37,11 +37,11 @@ Exemplo:
 - [x] Docstrings
 
 ### App: Alimentos
-- [ ] Modelo
+- [x] Modelo
 - [ ] Visão
-  - [ ] Registrar
-  - [ ] Editar
-  - [ ] Remover
+  - [ ] ~~Registrar~~
+  - [ ] ~~Editar~~
+  - [ ] ~~Remover~~
   - [ ] Listar
   - [ ] <font style='color : red'>Somar calorias</font>
 - [ ] Rotas

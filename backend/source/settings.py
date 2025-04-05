@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'environ',
     'users',
     'students',
+    'food',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
