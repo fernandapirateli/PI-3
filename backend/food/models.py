@@ -1,59 +1,69 @@
 from django.db import models
 
 
+def nutri_field(verbose_name):
+    return models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        verbose_name=verbose_name
+    )
+
+
 class IBGEFood(models.Model):
     codigo = models.CharField(max_length=8)
     descricao_do_alimento = models.CharField(max_length=80)
     categoria = models.CharField(max_length=80)
-    codigo_de_preparacao = models.CharField(max_length=3)
+    codigo_de_preparacao = models.CharField(max_length=3, blank=True, null=True)
     descricao_da_preparacao = models.CharField(max_length=80)
 
     # Macronutrientes e energia
-    energia_kcal = models.DecimalField(max_digits=10, decimal_places=2)
-    proteina_g = models.DecimalField(max_digits=10, decimal_places=2)
-    lipidios_totais_g = models.DecimalField(max_digits=10, decimal_places=2)
-    carboidrato_g = models.DecimalField(max_digits=10, decimal_places=2)
-    fibra_alimentar_total_g = models.DecimalField(max_digits=10, decimal_places=2)
+    energia_kcal = nutri_field('Energia (kcal)')
+    proteina_g = nutri_field('Proteínas (g)')
+    lipidios_totais_g = nutri_field('Lipídios totais (g)')
+    carboidrato_g = nutri_field('Carboidratos (g)')
+    fibra_alimentar_total_g = nutri_field('Fibras alimentares (g)')
 
     # Lipídios e colesterol
-    colesterol_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    ag_saturados_g = models.DecimalField(max_digits=10, decimal_places=2)
-    ag_monoinsaturados_g = models.DecimalField(max_digits=10, decimal_places=2)
-    ag_poliinsaturados_g = models.DecimalField(max_digits=10, decimal_places=2)
-    acido_linoleico_g = models.DecimalField(max_digits=10, decimal_places=2)
-    acido_linolenico_g = models.DecimalField(max_digits=10, decimal_places=2)
-    ag_trans_g = models.DecimalField(max_digits=10, decimal_places=2)
+    colesterol_mg = nutri_field('Colesterol (mg)')
+    ag_saturados_g = nutri_field('Ácidos graxos saturados (g)')
+    ag_monoinsaturados_g = nutri_field('Ácidos graxos monoinsaturados (g)')
+    ag_poliinsaturados_g = nutri_field('Ácidos graxos poliinsaturados (g)')
+    acido_linoleico_g = nutri_field('Ácido linoleico (g)')
+    acido_linolenico_g = nutri_field('Ácido linolênico (g)')
+    ag_trans_g = nutri_field('Ácidos graxos trans (g)')
 
     # Açúcares
-    acucar_total_g = models.DecimalField(max_digits=10, decimal_places=2)
-    acucar_adicionado_g = models.DecimalField(max_digits=10, decimal_places=2)
+    acucar_total_g = nutri_field('Açúcares totais (g)')
+    acucar_adicionado_g = nutri_field('Açúcares adicionados (g)')
 
     # Minerais
-    calcio_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    magnesio_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    manganes_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    fosforo_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    ferro_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    sodio_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    sodio_adicionado_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    potassio_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    cobre_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    zinco_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    selenio_mcg = models.DecimalField(max_digits=10, decimal_places=2)
+    calcio_mg = nutri_field('Cálcio (mg)')
+    magnesio_mg = nutri_field('Magnésio (mg)')
+    manganes_mg = nutri_field('Manganês (mg)')
+    fosforo_mg = nutri_field('Fósforo (mg)')
+    ferro_mg = nutri_field('Ferro (mg)')
+    sodio_mg = nutri_field('Sódio (mg)')
+    sodio_adicionado_mg = nutri_field('Sódio adicionado (mg)')
+    potassio_mg = nutri_field('Potássio (mg)')
+    cobre_mg = nutri_field('Cobre (mg)')
+    zinco_mg = nutri_field('Zinco (mg)')
+    selenio_mcg = nutri_field('Selênio (µg)')
 
     # Vitaminas
-    retinol_mcg = models.DecimalField(max_digits=10, decimal_places=2)
-    vitamina_a_rae_mcg = models.DecimalField(max_digits=10, decimal_places=2)
-    tiamina_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    riboflavina_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    niacina_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    niacina_ne_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    piridoxina_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    cobalamina_mcg = models.DecimalField(max_digits=10, decimal_places=2)
-    folato_dfe_mcg = models.DecimalField(max_digits=10, decimal_places=2)
-    vitamina_d_mcg = models.DecimalField(max_digits=10, decimal_places=2)
-    vitamina_e_mg = models.DecimalField(max_digits=10, decimal_places=2)
-    vitamina_c_mg = models.DecimalField(max_digits=10, decimal_places=2)
+    retinol_mcg = nutri_field('Retinol (µg)')
+    vitamina_a_rae_mcg = nutri_field('Vitamina A (RAE µg)')
+    tiamina_mg = nutri_field('Tiamina (B1) (mg)')
+    riboflavina_mg = nutri_field('Riboflavina (B2) (mg)')
+    niacina_mg = nutri_field('Niacina (B3) (mg)')
+    niacina_ne_mg = nutri_field('Equivalentes de niacina (mg)')
+    piridoxina_mg = nutri_field('Piridoxina (B6) (mg)')
+    cobalamina_mcg = nutri_field('Cobalamina (B12) (µg)')
+    folato_dfe_mcg = nutri_field('Folato (DFE µg)')
+    vitamina_d_mcg = nutri_field('Vitamina D (µg)')
+    vitamina_e_mg = nutri_field('Vitamina E (mg)')
+    vitamina_c_mg = nutri_field('Vitamina C (mg)')
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)

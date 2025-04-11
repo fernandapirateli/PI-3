@@ -10,11 +10,21 @@ Webservice de contagem de calorias e macronutrientes.
 4. Certifique-se de que o arquivo **.env** esteja dentro do diretório ***backend***. 
 
 ### Execução
-0. No terminal ou CLI entre no diretório ***backend*** 
-1. Enquanto novos objetos estão sendo adicionados ou alterados no DB local, 
+0. Acessar o diretório backend ``cd backend``
+1. Enquanto objetos estão sendo adicionados ou alterados em algum arquivo app/model.py, 
 será preciso executar o comando ```python manage.py migrate```. 
 2. Para iniciar o servidor de desenvolvimento, use o comando ``python manage.py runserver``
 3. Abra o navegador e insira ***localhost:8000*** na barra de endeços.
+
+### Base de dados de alimentos
+
+Para popular a tabela de alimentos* basta executar o comando ```python manage.py load_ibge_data``` e esperar. 
+Normalmente, essa é uma ação a qual deve ser executada somente uma vez.
+
+### Tabela IBGE de Alimentos 
+Trata-se de uma versão resumida das tabelas de composição nutricional dos alimentos consumidos no Brasil / IBGE.
+A qual lista os valores de energia, macronutrientes e fibra de diversos alimentos.
+* [Tabela IBGE de Alimentos](https://biblioteca.ibge.gov.br/visualizacao/livros/liv50002.pdf)
 
 ### Dependências
 * [Framework Django](https://pypi.org/project/Django/)
@@ -46,5 +56,6 @@ será preciso executar o comando ```python manage.py migrate```.
 versão mais atualizada do código fonte, e diminuir as chances de erros;
 * Elabore commits incrementais, a cada nova feature implementada, conjunto de arquivos inseridos ou erros corrigidos. 
 Possibilita melhor detecção, isolamento e mitigação de falhas e erros;
-* Mantenha atualizado, na medida do possível, a lista de tarefas (***TODO.md***). Marcando com um **x** as tarefas concluídas.
+* Mantenha atualizado, na medida do possível, a lista de tarefas (***TODO.md***). Marcando com um **x** as tarefas 
+concluídas.
 Ajuda a ter uma visão do andamento do projeto. :wink:
