@@ -46,9 +46,9 @@ Exemplo:
   - [x] Listar
   - [x] Pesquisar
   - [ ] <font style='color : red'>Somar calorias</font>
-- [ ] Rotas
+- [x] Rotas
 - [ ] Testes unitários
-- [ ] Docstrings
+- [x] Docstrings
 
 ### App: Cardápio
 - [ ] Modelo

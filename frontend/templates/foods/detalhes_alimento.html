@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <div class="div-area">
+        <form class="form-area" id="details">
+            {% csrf_token %}
+            <h1>Detalhes do Alimento</h1>
+            <hr width="100%" />
+            <!-- Basic Information Section -->
+            <div class="section">
+                <h2>Informações Básicas</h2>
+                <label for="food_name">Descrição do alimento</label>
+                <p id="food_name">{{ food.descricao_do_alimento }}</p>
+                <label for="food_code">Código</label>
+                <p id="food_code">{{ food.codigo }}</p>
+                <label for="food_category">Categoria</label>
+                <p id="food_category">{{ food.categoria }}</p>
+                <label for="prep_code">Código de Preparação</label>
+                <p id="prep_code">{{ food.codigo_de_preparacao }}</p>
+                <label for="prep_description">Descrição da Preparação</label>
+                <p id="prep_description">{{ food.descricao_da_preparacao }}</p>
+            </div>
+            <!-- Macronutrients Section -->
+            <div class="section">
+                <h2>Macronutrientes (por 100g)</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="energy">Energia (kcal)</label>
+                        <p id="energy">{{ food.energia_kcal }}</p>
+                    </div>
+                    <div>
+                        <label for="protein">Proteínas (g)</label>
+                        <p id="protein">{{ food.proteina_g }}</p>
+                    </div>
+                    <div>
+                        <label for="fat">Lipídios Totais (g)</label>
+                        <p id="fat">{{ food.lipidios_totais_g }}</p>
+                    </div>
+                    <div>
+                        <label for="carbs">Carboidratos (g)</label>
+                        <p id="carbs">{{ food.carboidrato_g }}</p>
+                    </div>
+                    <div>
+                        <label for="fiber">Fibras Alimentares (g)</label>
+                        <p id="fiber">{{ food.fibra_alimentar_total_g }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Fats Section -->
+            <div class="section">
+                <h2>Composição de Gorduras</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="cholesterol">Colesterol (mg)</label>
+                        <p id="cholesterol">{{ food.colesterol_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="saturated">Ácidos Graxos Saturados (g)</label>
+                        <p id="saturated">{{ food.ag_saturados_g }}</p>
+                    </div>
+                    <div>
+                        <label for="monounsat">Ácidos Graxos Monoinsaturados (g)</label>
+                        <p id="monounsat">{{ food.ag_monoinsaturados_g }}</p>
+                    </div>
+                    <div>
+                        <label for="polyunsat">Ácidos Graxos Poliinsaturados (g)</label>
+                        <p id="polyunsat">{{ food.ag_poliinsaturados_g }}</p>
+                    </div>
+                    <div>
+                        <label for="linoleic">Ácido Linoleico (g)</label>
+                        <p id="linoleic">{{ food.acido_linoleico_g }}</p>
+                    </div>
+                    <div>
+                        <label for="linolenic">Ácido Linolênico (g)</label>
+                        <p id="linolenic">{{ food.acido_linolenico_g }}</p>
+                    </div>
+                    <div>
+                        <label for="transfat">Ácidos Graxos Trans (g)</label>
+                        <p id="transfat">{{ food.ag_trans_g }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Sugars Section -->
+            <div class="section">
+                <h2>Açúcares</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="total_sugar">Açúcares Totais (g)</label>
+                        <p id="total_sugar">{{ food.acucar_total_g }}</p>
+                    </div>
+                    <div>
+                        <label for="added_sugar">Açúcares Adicionados (g)</label>
+                        <p id="added_sugar">{{ food.acucar_adicionado_g }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Minerals Section -->
+            <div class="section">
+                <h2>Minerais</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="calcium">Cálcio (mg)</label>
+                        <p id="calcium">{{ food.calcio_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="magnesium">Magnésio (mg)</label>
+                        <p id="magnesium">{{ food.magnesio_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="manganese">Manganês (mg)</label>
+                        <p id="manganese">{{ food.manganes_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="phosphorus">Fósforo (mg)</label>
+                        <p id="phosphorus">{{ food.fosforo_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="iron">Ferro (mg)</label>
+                        <p id="iron">{{ food.ferro_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="sodium">Sódio (mg)</label>
+                        <p id="sodium">{{ food.sodio_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="added_sodium">Sódio Adicionado (mg)</label>
+                        <p id="added_sodium">{{ food.sodio_adicionado_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="potassium">Potássio (mg)</label>
+                        <p id="potassium">{{ food.potassio_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="copper">Cobre (mg)</label>
+                        <p id="copper">{{ food.cobre_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="zinc">Zinco (mg)</label>
+                        <p id="zinc">{{ food.zinco_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="selenium">Selênio (µg)</label>
+                        <p id="selenium">{{ food.selenio_mcg }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Vitamins Section -->
+            <div class="section">
+                <h2>Vitaminas</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="retinol">Retinol (µg)</label>
+                        <p id="retinol">{{ food.retinol_mcg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_a">Vitamina A (RAE µg)</label>
+                        <p id="vit_a">{{ food.vitamina_a_rae_mcg }}</p>
+                    </div>
+                    <div>
+                        <label for="thiamine">Tiamina - B1 (mg)</label>
+                        <p id="thiamine">{{ food.tiamina_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="riboflavin">Riboflavina - B2 (mg)</label>
+                        <p id="riboflavin">{{ food.riboflavina_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="niacin">Niacina - B3 (mg)</label>
+                        <p id="niacin">{{ food.niacina_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="niacin_eq">Equivalentes de Niacina (mg)</label>
+                        <p id="niacin_eq">{{ food.niacina_ne_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_b6">Piridoxina - B6 (mg)</label>
+                        <p id="vit_b6">{{ food.piridoxina_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_b12">Cobalamina - B12 (µg)</label>
+                        <p id="vit_b12">{{ food.cobalamina_mcg }}</p>
+                    </div>
+                    <div>
+                        <label for="folate">Folato (DFE µg)</label>
+                        <p id="folate">{{ food.folato_dfe_mcg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_d">Vitamina D (µg)</label>
+                        <p id="vit_d">{{ food.vitamina_d_mcg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_e">Vitamina E (mg)</label>
+                        <p id="vit_e">{{ food.vitamina_e_mg }}</p>
+                    </div>
+                    <div>
+                        <label for="vit_c">Vitamina C (mg)</label>
+                        <p id="vit_c">{{ food.vitamina_c_mg }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Timestamps -->
+            <div class="section">
+                <h2>Metadados</h2>
+                <div class="nutrient-grid">
+                    <div>
+                        <label for="created">Criado em</label>
+                        <p id="created">{{ food.created_at }}</p>
+                    </div>
+                    <div>
+                        <label for="updated">Atualizado em</label>
+                        <p id="updated">{{ food.updated_at }}</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

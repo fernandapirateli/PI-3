@@ -21,10 +21,10 @@
             <label for="">Selecione um alimento para visualizar detalhes</label>
             <div class="lista-alimentos">
                 {%for food in lista_alimentos%}
-                <form id='list_foods_form' action=" " method="POST">
+                <form id='list_foods_form' action="{% url 'detalhes_alimento' %}" method="POST">
                     {% csrf_token %}
                     <small>{{food.descricao_do_alimento}} | {{food.categoria}} | {{food.descricao_da_preparacao}}</small>
-                    <button type="submit" class="btn" disabled>&#10551;</button>
+                    <button type="submit" class="btn">&#10551;</button>
                     <input hidden name="food_id" value="{{food.id}}">
                 </form>
                 {%endfor%}

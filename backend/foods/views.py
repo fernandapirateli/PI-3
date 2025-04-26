@@ -46,3 +46,25 @@ def listar_alimentos(request):
     return render(request, 'foods/listar_alimentos.html', contexto)
 
 
+def detalhes_alimento(request):
+    """
+    Exibe o detalhes de um alimento específico quando acessado via POST.
+    Recupera os dados do alimento com base no ID fornecido e renderiza a página
+    de detalhes com essas informações. Acesso restrito via método POST.
+
+    Args:
+        request (HttpRequest): Objeto de requisição contendo:
+            - POST: food_id (ID do alimento a ser visualizado)
+    Returns:
+        HttpResponse: Renderiza 'foods/detalhes_alimento.html' com os dados do alimento
+        HttpResponseRedirect: Redireciona para 'index' se acessado via GET
+    """
+
+    if request.method == 'POST':
+        contexto = gerir_contexto(request)
+        food_id = request.POST.get('food_id')
+        contexto['food'] = IBGEFood.objects.get(pk=food_id)
+        return render(request, 'foods/detalhes_alimento.html', contexto)
+
+    else:
+        return redirect('index')
