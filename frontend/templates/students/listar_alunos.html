@@ -19,15 +19,15 @@
                 {%endfor%}
             </div>
         </div>
-        <form class="form-area" id="pesquisar-aluno" method="POST">
+        <form class="form-area" id="pesquisar-aluno" action="{% url 'listar_alunos' %}" method="POST">
             {% csrf_token %}
             <h1>Pesquisar Aluno</h1>
             <hr width="100%" />
             <label for="">Forneça o nome ou RA de um aluno</label>
             <div class="lista-alunos">
-                <input placeholder="N/A" disabled>
+                <input name="search" placeholder="Machado de Assis">
             </div>
-            <input type="submit" class="btn" value="Pesquisar" disabled>
+            <input type="submit" class="btn" value="Pesquisar">
             <input hidden name="option" value='listar_alunos'>
         </form>
     </div>

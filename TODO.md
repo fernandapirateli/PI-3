@@ -32,6 +32,7 @@ Exemplo:
   - [x] Editar
   - [x] Remover
   - [x] Listar
+  - [x] Pesquisar
 - [x] Rotas
 - [x] Testes unitários
 - [x] Docstrings
@@ -43,6 +44,7 @@ Exemplo:
   - [ ] ~~Editar~~
   - [ ] ~~Remover~~
   - [ ] Listar
+  - [ ] Pesquisar
   - [ ] <font style='color : red'>Somar calorias</font>
 - [ ] Rotas
 - [ ] Testes unitários

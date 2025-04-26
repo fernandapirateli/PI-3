@@ -121,29 +121,43 @@ def registrar_aluno(request):
 
 def listar_alunos(request):
     """
-    Exibe a lista de alunos ordenada por nome para usuários autenticados.
-    Recupera todos os alunos do banco de dados ordenados alfabeticamente e os
-    adiciona ao contexto de renderização. Requer autenticação do usuário.
+    Exibe a lista de alunos com opção de busca, para usuários autenticados.
+    Funcionalidades:
+    Exibe todos os alunos ordenados alfabeticamente por nome
+    Quando o termo de busca contém apenas letras (isalpha())
+    Quando o termo de busca contém números ou números e letras (isalnum())
 
     Args:
-        request (HttpRequest): Objeto de requisição Django.
+        request (HttpRequest): Objeto de requisição Django contendo:
+            - Método POST com parâmetro 'search' (opcional)
+            - Sessão do usuário para verificação de autenticação
+
     Returns:
-        HttpResponse: Renderiza 'students/listar_alunos.html' com a lista de alunos
-                     se o usuário estiver autenticado.
-        HttpResponseRedirect: Redireciona para 'index' se não autenticado.
+        HttpResponse: Renderiza 'students/listar_alunos.html' com:
+            - Lista completa de alunos (ordem alfabética) OU
+            - Resultados filtrados por RA (ordem alfabética)
+            - Contexto com informações de login
+        HttpResponseRedirect: Redireciona para 'index' se usuário não autenticado
     """
 
     contexto = gerir_contexto(request)
-    if request.method == 'POST':
-        pass
+    lista_alunos = []
+
+    if request.method == 'POST' and contexto['login']:
+        search = request.POST.get('search')
+
+        if search.isalpha():
+            lista_alunos = Student.objects.order_by('student_name').filter(student_name__icontains=search)
+        elif search.isalnum():
+            lista_alunos = Student.objects.order_by('student_name').filter(student_ra__icontains=search)
     else:
         if contexto['login']:
             lista_alunos = Student.objects.order_by('student_name').all()
-            contexto['lista_alunos'] = lista_alunos
-            return render(request, 'students/listar_alunos.html', contexto)
-
         else:
             return redirect('index')
+
+    contexto['lista_alunos'] = lista_alunos
+    return render(request, 'students/listar_alunos.html', contexto)
 
 
 def perfil_aluno(request):
@@ -225,3 +239,6 @@ def excluir_aluno(student_id):
         name, group = student.student_name, student.student_group
         student.delete()
         print(f'O registro do(a) aluno(a) {name}, da turma {group} foi excluído com sucesso')
+
+
+
