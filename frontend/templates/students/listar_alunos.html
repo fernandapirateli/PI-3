@@ -3,6 +3,17 @@
 {% block content %}
 <section class="container">
     <div class="div-area">
+        <form class="form-area" id="pesquisar-aluno" action="{% url 'listar_alunos' %}" method="POST">
+            {% csrf_token %}
+            <h1>Pesquisar Aluno</h1>
+            <hr width="100%" />
+            <label for="">Forneça o nome ou RA de um aluno</label>
+            <div class="lista-alunos">
+                <input name="search" placeholder="Machado de Assis">
+            </div>
+            <input type="submit" class="btn" value="Pesquisar">
+            <input hidden name="option" value='listar_alunos'>
+        </form>
         <div class="form-area" id="lista-alunos">
             {% csrf_token %}
             <h1>Lista de alunos</h1>
@@ -19,17 +30,6 @@
                 {%endfor%}
             </div>
         </div>
-        <form class="form-area" id="pesquisar-aluno" action="{% url 'listar_alunos' %}" method="POST">
-            {% csrf_token %}
-            <h1>Pesquisar Aluno</h1>
-            <hr width="100%" />
-            <label for="">Forneça o nome ou RA de um aluno</label>
-            <div class="lista-alunos">
-                <input name="search" placeholder="Machado de Assis">
-            </div>
-            <input type="submit" class="btn" value="Pesquisar">
-            <input hidden name="option" value='listar_alunos'>
-        </form>
     </div>
 </section>
 {% endblock %}

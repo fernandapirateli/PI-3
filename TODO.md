@@ -43,8 +43,8 @@ Exemplo:
   - [ ] ~~Registrar~~
   - [ ] ~~Editar~~
   - [ ] ~~Remover~~
-  - [ ] Listar
-  - [ ] Pesquisar
+  - [x] Listar
+  - [x] Pesquisar
   - [ ] <font style='color : red'>Somar calorias</font>
 - [ ] Rotas
 - [ ] Testes unitários

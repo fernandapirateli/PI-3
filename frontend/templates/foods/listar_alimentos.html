@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <div class="div-area">
+        <form class="form-area" id="pesquisar-alimento" action="{% url 'listar_alimentos' %}" method="POST">
+            {% csrf_token %}
+            <h1>Pesquisar alimento</h1>
+            <hr width="100%" />
+            <label for="">Forneça a descrição ou o código de um alimento</label>
+            <div class="lista-alimentos">
+                <input name="search" placeholder="Feijão-de-corda">
+            </div>
+            <input type="submit" class="btn" value="Pesquisar">
+            <input hidden name="option" value='listar_alimentos'>
+        </form>
+        <div class="form-area" id="lista-alimentos">
+            {% csrf_token %}
+            <h1>Lista de alimentos</h1>
+            <hr width="100%" />
+            <label for="">Selecione um alimento para visualizar detalhes</label>
+            <div class="lista-alimentos">
+                {%for food in lista_alimentos%}
+                <form id='list_foods_form' action=" " method="POST">
+                    {% csrf_token %}
+                    <small>{{food.descricao_do_alimento}} | {{food.categoria}} | {{food.descricao_da_preparacao}}</small>
+                    <button type="submit" class="btn" disabled>&#10551;</button>
+                    <input hidden name="food_id" value="{{food.id}}">
+                </form>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
