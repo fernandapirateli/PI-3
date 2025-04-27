@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <div class="div-area">
+        <form class="form-area" id="remove_food" action="" method="POST">
+            {% csrf_token %}
+            <div class="table-area">
+                <table class="listed-foods">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor Calórico (kcal)</th>
+                            <th>Remover</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if list_objects %}
+                        {% for food in list_objects %}
+                        <tr>
+                            <td>{{ food.descricao_do_alimento }}</td>
+                            <td>{{ food.energia_kcal }}</td>
+                            <td class="check-box-foods">
+                                <input type="checkbox" name="remove_food_ids" value="{{ food.id }}">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">Não constam ingredientes ou refeições selecionadas.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            {% if list_objects %}
+            <hr width="100%" />
+            <div class="table-area">
+                <table class="macronutrientes-table">
+                    <caption>Totais em macronutrientes (por 100g)</caption>
+                    <thead>
+                        <tr>
+                            {% for total, verbose in dict_total.values %}
+                            <th>{{ verbose }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for total, verbose in dict_total.values %}
+                            <td>{{ total|floatformat:2 }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <input type="submit" class="btn" value="Excluir selecionados" disabled>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </form>
+        <form class="form-area" id="pesquisar-alimento" action="{% url 'somar_alimentos' %}" method="POST">
+            {% csrf_token %}
+            <h1>Pesquisa avançada</h1>
+            <hr width="100%" />
+            <label for="">Forneça a descrição ou o código de um alimento</label>
+            <div class="lista-alimentos">
+                <input name="search" placeholder="Feijão-de-corda" required>
+            </div>
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria">
+                <option disabled selected value>-- selecione uma opção --</option>
+                {% for verbose in categoria_choices %}
+                <option value="{{verbose}}">{{verbose}}</option>
+                {% endfor %}
+            </select>
+            <label for="modo_preparo">Modo de preparo</label>
+            <select id="modo_preparo" name="modo_preparo">
+                <option disabled selected value>-- selecione uma opção --</option>
+                {% for key, verbose in modo_preparo_choices %}
+                <option value="{{key}}">{{verbose}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn" value="Pesquisar">
+        </form>
+        {% if lista_alimentos %}
+        <div class="list_foods_form" id="lista-alimentos">
+            {% csrf_token %}
+            <h1>Resultados</h1>
+            <hr width="100%" />
+            <label for="">Selecione um alimento para incluí-lo à uma receita</label>
+            <div class="lista-alimentos">
+                {%for food in lista_alimentos%}
+                <form id='list_foods_form' action=" " method="POST">
+                    {% csrf_token %}
+                    <small>{{food.descricao_do_alimento}} | {{food.categoria}} | {{food.descricao_da_preparacao}}</small>
+                    <small>Calorias: {{food.energia_kcal}}</small>
+                    <button type="submit" class="btn">&#x2713;</button>
+                    <input hidden name="food_id" value="{{food.id}}">
+                    <input hidden name="option" value="inserir">
+                </form>
+                {%endfor%}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

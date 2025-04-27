@@ -1,6 +1,32 @@
 from django.shortcuts import render, redirect
 from .models import IBGEFood
 from users.views import gerir_contexto
+from django.db.models import Q
+from .class_food import *
+from .class_food import MACRONUTRIENTES
+
+GLOBAL_LIST_FOOD_ID = []
+
+
+def pesquisar_alimentos(request):
+    lista_alimentos = []
+    search = request.POST.get('search')
+    categoria = request.POST.get('categoria')
+    cod_preparo = request.POST.get('modo_preparo')
+
+    food_query = Q(descricao_do_alimento__icontains=search)
+    if categoria is not None:
+        food_query &= Q(categoria=categoria)
+    if cod_preparo is not None:
+        food_query &= Q(codigo_de_preparacao=cod_preparo)
+
+    if search.isalpha():
+        lista_alimentos = IBGEFood.objects.order_by('descricao_do_alimento').filter(food_query)
+    elif search.isalnum():
+        lista_alimentos = IBGEFood.objects.order_by('descricao_do_alimento').filter(
+            codigo__icontains=search)
+
+    return lista_alimentos
 
 
 def listar_alimentos(request):
@@ -19,23 +45,14 @@ def listar_alimentos(request):
     Returns:
         HttpResponse: Renderiza 'foods/listar_alimentos.html' com:
             - Lista completa de alimentos (ordem alfabética) OU
-            - Resultados filtrados por RA (ordem alfabética)
+            - Resultados filtrados por Código (ordem alfabética)
             - Contexto com informações de login
         HttpResponseRedirect: Redireciona para 'index' se usuário não autenticado
     """
 
     contexto = gerir_contexto(request)
-    lista_alimentos = []
-
     if request.method == 'POST' and contexto['login']:
-        search = request.POST.get('search')
-
-        if search.isalpha():
-            lista_alimentos = IBGEFood.objects.order_by('descricao_do_alimento').filter(
-                descricao_do_alimento__icontains=search)
-        elif search.isalnum():
-            lista_alimentos = IBGEFood.objects.order_by('descricao_do_alimento').filter(
-                codigo__icontains=search)
+        lista_alimentos = pesquisar_alimentos(request)
     else:
         if contexto['login']:
             lista_alimentos = IBGEFood.objects.order_by('descricao_do_alimento').all()
@@ -44,6 +61,37 @@ def listar_alimentos(request):
 
     contexto['lista_alimentos'] = lista_alimentos
     return render(request, 'foods/listar_alimentos.html', contexto)
+
+
+def somar_alimentos(request):
+    global GLOBAL_LIST_FOOD_ID
+
+    lista_alimentos = []
+    contexto = gerir_contexto(request)
+
+    if contexto['login']:
+        option = request.POST.get('option')
+
+        if request.method == 'POST' and option is None:
+            lista_alimentos = pesquisar_alimentos(request)
+
+        if request.method == 'POST' and option == 'inserir':
+            food_id = request.POST.get('food_id')
+            GLOBAL_LIST_FOOD_ID.append(food_id)
+
+        list_objects = IBGEFood.objects.filter(pk__in=GLOBAL_LIST_FOOD_ID)
+        dict_total = calcular_nutrientes(list_objects)
+
+        contexto['dict_total'] = dict_total
+        contexto['list_objects'] = list_objects
+        contexto['lista_alimentos'] = lista_alimentos
+        contexto['modo_preparo_choices'] = MODO_PREPARO
+        contexto['categoria_choices'] = CATEGORIA
+
+        return render(request, 'foods/somar_alimentos.html', contexto)
+
+    else:
+        return redirect('index')
 
 
 def detalhes_alimento(request):
@@ -68,3 +116,23 @@ def detalhes_alimento(request):
 
     else:
         return redirect('index')
+
+
+def calcular_nutrientes(list_objects):
+    dict_total = {}
+    grams = 100
+
+    for nutriente, verbose in MACRONUTRIENTES:
+        verbose = verbose.split()[0]
+        dict_total[nutriente] = [0.0, verbose]
+
+    for food in list_objects:
+        factor = grams / 100
+        for key in dict_total.keys():
+
+            valor_nutriente = getattr(food, key, 0.0)
+            valor_nutriente = 0.0 if valor_nutriente is None else valor_nutriente
+            dict_total[key][0] += float(valor_nutriente) * factor
+
+    return dict_total
+
