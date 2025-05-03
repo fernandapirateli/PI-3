@@ -11,7 +11,10 @@
                         <tr>
                             <th>Descrição</th>
                             <th>Valor Calórico</th>
-                            <th>Remover</th>
+                            <th>
+                                Remover
+                                <button type="button" id="select-all" class="select-all-btn">Selecionar todos</button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,7 +24,8 @@
                             <td>{{ food.descricao_do_alimento }}</td>
                             <td>{{ food.energia_kcal }}</td>
                             <td class="check-box-foods">
-                                <input type="checkbox" name="remove_food_ids" value="{{ food.id }}">
+                                <input type="checkbox" name="remove_food_ids"
+                                       value="{{ food.id }}" class="food-checkbox">
                             </td>
                         </tr>
                         {% endfor %}
@@ -108,4 +112,42 @@
         {% endif %}
     </div>
 </section>
+
+<!-- AVISO: este trecho de script deve ser migrado para arquivo .js -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAllBtn = document.getElementById('select-all');
+    const checkboxes = document.querySelectorAll('.food-checkbox');
+    let allSelected = false;
+
+    selectAllBtn.addEventListener('click', function() {
+        allSelected = !allSelected; // Alterna o estado
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = allSelected;
+        });
+
+        selectAllBtn.textContent = allSelected ? 'Desmarcar todos' : 'Selecionar todos';
+    });
+});
+</script>
+
+<!-- AVISO: este trecho de estilo deve ser migrado para arquivo .css -->
+<style>
+.select-all-btn {
+    background: none;
+    border: none;
+    color: #0066cc;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 10px;
+    padding: 0px 0px;
+}
+
+.select-all-btn:hover {
+    color: #004499;
+}
+</style>
+
 {% endblock %}
