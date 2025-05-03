@@ -79,6 +79,13 @@ def somar_alimentos(request):
             food_id = request.POST.get('food_id')
             GLOBAL_LIST_FOOD_ID.append(food_id)
 
+        if request.method == 'POST' and option == 'remover':
+            remove_food_ids = request.POST.getlist('remove_food_ids')
+            if len(remove_food_ids) > 0:
+                [GLOBAL_LIST_FOOD_ID.remove(food_id) for food_id in remove_food_ids]
+            else:
+                pass
+
         list_objects = IBGEFood.objects.filter(pk__in=GLOBAL_LIST_FOOD_ID)
         dict_total = calcular_nutrientes(list_objects)
 
@@ -135,4 +142,3 @@ def calcular_nutrientes(list_objects):
             dict_total[key][0] += float(valor_nutriente) * factor
 
     return dict_total
-

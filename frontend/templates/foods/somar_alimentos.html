@@ -3,14 +3,14 @@
 {% block content %}
 <section class="container">
     <div class="div-area">
-        <form class="form-area" id="remove_food" action="" method="POST">
+        <form class="form-area" id="remove_food" action="{% url 'somar_alimentos' %}" method="POST">
             {% csrf_token %}
             <div class="table-area">
                 <table class="listed-foods">
                     <thead>
                         <tr>
                             <th>Descrição</th>
-                            <th>Valor Calórico (kcal)</th>
+                            <th>Valor Calórico</th>
                             <th>Remover</th>
                         </tr>
                     </thead>
@@ -53,7 +53,8 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <input type="submit" class="btn" value="Excluir selecionados" disabled>
+                                <input type="submit" class="btn" value="Remover selecionados">
+                                <input hidden name="option" value="remover">
                             </td>
                         </tr>
                     </tbody>
