@@ -13,7 +13,9 @@
                             <th>Valor Calórico</th>
                             <th>
                                 Remover
+                                {% if list_objects %}
                                 <button type="button" id="select-all" class="select-all-btn">Selecionar todos</button>
+                                {% endif %}
                             </th>
                         </tr>
                     </thead>
@@ -68,16 +70,18 @@
         </form>
 
         {% if list_objects %}
-        <div class="table-area">
-        <!-- Obs.: essa estrutura ainda irá mudar.-->
-            <p>
-                "Esta refeição corresponde a aproximadamente
-                {{dict_pct.lipidios_totais_g}}% da recomendação diária de lipídios,
-                {{dict_pct.carboidrato_g}}% de carboidratos,
-                {{dict_pct.proteina_g}}% de proteínas,
-                {{dict_pct.fibra_alimentar_total_g}}% de fibras e
-                {{dict_pct.energia_kcal}}% do valor energético total para a faixa etária de 4 a 8 anos."
-            </p>
+        <div id="sidebarRadar">
+            <canvas id="graficoRadar"></canvas>
+            <div class="describe-area" id="describe-area">
+                <small>
+                    "Esta refeição corresponde a aproximadamente
+                    {{dict_pct.lipidios_totais_g}}% da recomendação diária de lipídios,
+                    {{dict_pct.carboidrato_g}}% de carboidratos,
+                    {{dict_pct.proteina_g}}% de proteínas,
+                    {{dict_pct.fibra_alimentar_total_g}}% de fibras e
+                    {{dict_pct.energia_kcal}}% do valor energético total para a faixa etária de 4 a 8 anos."
+                </small>
+            </div>
         </div>
         {% endif %}
 
@@ -130,39 +134,126 @@
 
 <!-- AVISO: este trecho de script deve ser migrado para arquivo .js -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const selectAllBtn = document.getElementById('select-all');
-    const checkboxes = document.querySelectorAll('.food-checkbox');
-    let allSelected = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectAllBtn = document.getElementById('select-all');
+        const checkboxes = document.querySelectorAll('.food-checkbox');
+        let allSelected = false;
 
-    selectAllBtn.addEventListener('click', function() {
-        allSelected = !allSelected; // Alterna o estado
+        selectAllBtn.addEventListener('click', function() {
+            allSelected = !allSelected; // Alterna o estado
 
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = allSelected;
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = allSelected;
+            });
+
+            selectAllBtn.textContent = allSelected ? 'Desmarcar todos' : 'Selecionar todos';
+        });
+    });
+
+
+    let radarChart;
+    function renderRadarChart() {
+        const ctx = document.getElementById('graficoRadar');
+
+        if (radarChart) {
+            radarChart.destroy();
+        }
+
+        const valores = [
+            parseFloat('{{ dict_pct.lipidios_totais_g }}'),
+            parseFloat('{{ dict_pct.carboidrato_g }}'),
+            parseFloat('{{ dict_pct.proteina_g }}'),
+            parseFloat('{{ dict_pct.fibra_alimentar_total_g }}'),
+            parseFloat('{{ dict_pct.energia_kcal }}')
+        ];
+
+        const cores = valores.map(v => {
+            if (v < 15) return 'rgba(255, 99, 132, 0.5)';
+            if (v < 30) return 'rgba(255, 206, 86, 0.5)';
+            return 'rgba(75, 192, 192, 0.5)';
         });
 
-        selectAllBtn.textContent = allSelected ? 'Desmarcar todos' : 'Selecionar todos';
-    });
-});
+
+        const dataRadar = {
+            labels: [
+                'Lipídios',
+                'Carboidratos',
+                'Proteínas',
+                'Fibras',
+                'Energia (kcal)'
+            ],
+            datasets: [{
+                label: 'Distribuição de Macronutrientes',
+                data: valores,
+                backgroundColor: cores,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const configRadar = {
+            type: 'radar',
+            data: dataRadar,
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 40
+                    }
+                }
+            }
+        };
+
+        radarChart = new Chart(ctx, configRadar);
+    }
+
+    // Chama a função ao carregar
+    renderRadarChart();
 </script>
 
 <!-- AVISO: este trecho de estilo deve ser migrado para arquivo .css -->
 <style>
-.select-all-btn {
-    background: none;
-    border: none;
-    color: #0066cc;
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 0.6em;
-    margin-left: 10px;
-    padding: 0px 0px;
-}
+    .select-all-btn {
+        background: none;
+        border: none;
+        color: #0066cc;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 0.6em;
+        margin-left: 10px;
+        padding: 0px 0px;
+    }
 
-.select-all-btn:hover {
-    color: #004499;
-}
+    .select-all-btn:hover {
+        color: #004499;
+    }
+
+    #sidebarRadar {
+        position: sticky;
+        top: 10px;
+        width: 350px;
+        float: right;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    #graficoRadar {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .describe-area small {
+        display: block;
+        margin-top: 10px;
+        color: #333;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: right;
+    }
+
 </style>
 
 {% endblock %}

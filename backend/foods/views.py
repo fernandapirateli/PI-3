@@ -159,6 +159,6 @@ def calcular_pct(dict_daily_value, dict_current):
     }
     for macro_nutri, valor_nutriente in dict_daily_value.items():
         macro_nutri = dict_correcao[macro_nutri] if macro_nutri in dict_correcao.keys() else macro_nutri
-        dict_pct[macro_nutri] = round((dict_current[macro_nutri][0] * 100) / valor_nutriente, 2)
+        dict_pct[macro_nutri] = round((dict_current[macro_nutri][0] * 100) / valor_nutriente, 1)
 
     return dict_pct
