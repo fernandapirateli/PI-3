@@ -3,7 +3,8 @@ from .models import IBGEFood
 from users.views import gerir_contexto
 from django.db.models import Q
 from .class_food import *
-from .class_food import MACRONUTRIENTES
+from .class_nutrition import DRIS_NUTRICIONAIS
+
 
 GLOBAL_LIST_FOOD_ID = []
 
@@ -67,6 +68,7 @@ def somar_alimentos(request):
     global GLOBAL_LIST_FOOD_ID
 
     lista_alimentos = []
+    faixa_etaria = '4-8_anos'
     contexto = gerir_contexto(request)
 
     if contexto['login']:
@@ -89,6 +91,10 @@ def somar_alimentos(request):
         list_objects = IBGEFood.objects.filter(pk__in=GLOBAL_LIST_FOOD_ID)
         dict_total = calcular_nutrientes(list_objects)
 
+        dict_daily_value = DRIS_NUTRICIONAIS[faixa_etaria]
+        dict_pct = calcular_pct(dict_daily_value, dict_total)
+
+        contexto['dict_pct'] = dict_pct
         contexto['dict_total'] = dict_total
         contexto['list_objects'] = list_objects
         contexto['lista_alimentos'] = lista_alimentos
@@ -142,3 +148,17 @@ def calcular_nutrientes(list_objects):
             dict_total[key][0] += float(valor_nutriente) * factor
 
     return dict_total
+
+
+def calcular_pct(dict_daily_value, dict_current):
+    dict_pct = {}
+    dict_correcao = {
+        'fibras_g': 'fibra_alimentar_total_g',
+        'proteinas_g': 'proteina_g',
+        'carboidratos_g': 'carboidrato_g'
+    }
+    for macro_nutri, valor_nutriente in dict_daily_value.items():
+        macro_nutri = dict_correcao[macro_nutri] if macro_nutri in dict_correcao.keys() else macro_nutri
+        dict_pct[macro_nutri] = round((dict_current[macro_nutri][0] * 100) / valor_nutriente, 2)
+
+    return dict_pct
