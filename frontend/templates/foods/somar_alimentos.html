@@ -81,6 +81,12 @@
                     {{dict_pct.fibra_alimentar_total_g}}% de fibras e
                     {{dict_pct.energia_kcal}}% do valor energético total para a faixa etária de 4 a 8 anos."
                 </small>
+
+                <div class="tooltip-container">
+                    <span class="tooltip-label">Observações</span>
+                    <div class="tooltip-box">{{ tips }}</div>
+                </div>
+
             </div>
         </div>
         {% endif %}
@@ -183,7 +189,7 @@
                 'Energia (kcal)'
             ],
             datasets: [{
-                label: 'Distribuição de Macronutrientes',
+                label: 'Distribuição percentual de Macronutrientes',
                 data: valores,
                 backgroundColor: cores,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -254,6 +260,40 @@
         text-align: right;
     }
 
-</style>
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .tooltip-label {
+        font-size: 0.75rem;
+        color: #555;
+        text-decoration: underline dotted;
+        cursor: help;
+    }
+
+    .tooltip-box {
+        visibility: hidden;
+        width: 260px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-align: left;
+        border-radius: 6px;
+        padding: 10px;
+        position: absolute;
+        z-index: 10;
+        bottom: 125%;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 0.75rem;
+    }
+
+    .tooltip-container:hover .tooltip-box {
+        visibility: visible;
+        opacity: 1;
+    }
+    </style>
 
 {% endblock %}

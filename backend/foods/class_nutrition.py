@@ -35,6 +35,23 @@ DRIS_NUTRICIONAIS = {
         'energia_kcal': calcular_energia(130, 19, 35)
     },
 
+    # pré-adolescentes e adolescentes
+    '9-13_anos': {
+        'lipidios_totais_g': 40,
+        'carboidratos_g': 130,
+        'proteinas_g': 34,
+        'fibras_g': (31 + 26) / 2,
+        'energia_kcal': calcular_energia(130, 34, 40)
+    },
+    '14-18_anos': {
+        'lipidios_totais_g': (40 + 35) / 2,
+        'carboidratos_g': 130,
+        'proteinas_g': (52 + 46) / 2,
+        'fibras_g': (38 + 26) / 2,
+        'energia_kcal': calcular_energia(130, 49, 37.5)
+    },
+
+    # DRIs para faixas etárias segregadas por sexo
     # Homens
     '9-13_anos_masc': {
         'lipidios_totais_g': 40,
@@ -190,6 +207,24 @@ OBSERVACAO = {
         "Para crianças entre 4 e 8 anos, com padrão alimentar distribuído em 5 a 6 refeições diárias, "
         "é adequado que cada refeição contribua com cerca de 15% a 25% das necessidades nutricionais diárias."
     ),
+    '9-13_anos': (
+        "Durante a pré-adolescência, ocorre um ritmo de crescimento elevado que exige atenção nutricional. "
+        "Refeições equilibradas (5 a 6 por dia) devem prover de 15% a 25% das necessidades diárias de energia e nutrientes."
+    
+        " Meninos geralmente apresentam maior gasto energético, demandando uma ingestão calórica ligeiramente mais elevada."
+    
+        " Já as meninas, embora também em fase de crescimento, tendem a ter exigências calóricas um pouco menores."
+    ),
+    '14-18_anos': (
+        "A adolescência é marcada por intenso crescimento e mudanças corporais, exigindo maior atenção à alimentação. "
+        "Com 5 a 6 refeições ao dia, cada uma deve fornecer cerca de 15% a 25% das demandas nutricionais."
+    
+        " Meninos necessitam de maior aporte calórico e proteico, especialmente devido ao pico de crescimento e ao aumento da massa muscular."
+    
+        " Já as meninas requerem atenção especial ao ferro e ao cálcio, nutrientes fundamentais para o desenvolvimento nessa fase."
+    ),
+
+    # dicas para faixas etárias segregadas por sexo
     '9-13_anos_masc': (
         "Nessa fase de crescimento acelerado, meninos geralmente apresentam maior gasto energético. "
         "Para atender adequadamente às suas necessidades nutricionais, cada refeição — em um plano com 5 a 6 ao dia — "

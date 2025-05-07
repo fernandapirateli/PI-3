@@ -3,10 +3,13 @@ from .models import IBGEFood
 from users.views import gerir_contexto
 from django.db.models import Q
 from .class_food import *
-from .class_nutrition import DRIS_NUTRICIONAIS
+from .class_nutrition import *
 
 
 GLOBAL_LIST_FOOD_ID = []
+
+
+# FALTAM PASSAR AS OBSERVAÇÕES E A FAIXA ETÁRIA PARA O FRONT
 
 
 def pesquisar_alimentos(request):
@@ -68,7 +71,8 @@ def somar_alimentos(request):
     global GLOBAL_LIST_FOOD_ID
 
     lista_alimentos = []
-    faixa_etaria = '4-8_anos'
+    lista_faixas_etarias = ['4-8_anos', '9-13_anos', '14-18_anos']
+    faixa_etaria = lista_faixas_etarias[1]
     contexto = gerir_contexto(request)
 
     if contexto['login']:
@@ -94,6 +98,7 @@ def somar_alimentos(request):
         dict_daily_value = DRIS_NUTRICIONAIS[faixa_etaria]
         dict_pct = calcular_pct(dict_daily_value, dict_total)
 
+        contexto['tips'] = OBSERVACAO[faixa_etaria]
         contexto['dict_pct'] = dict_pct
         contexto['dict_total'] = dict_total
         contexto['list_objects'] = list_objects
