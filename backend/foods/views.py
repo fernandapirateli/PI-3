@@ -9,10 +9,22 @@ from .class_nutrition import *
 GLOBAL_LIST_FOOD_ID = []
 
 
-# FALTAM PASSAR AS OBSERVAÇÕES E A FAIXA ETÁRIA PARA O FRONT
-
-
 def pesquisar_alimentos(request):
+    """
+    Realiza uma busca flexível por alimentos no banco de dados IBGE com filtros opcionais.
+
+    Args:
+        request (HttpRequest): Objeto de requisição Django contendo os parâmetros POST:
+            - search (str): Termo de busca obrigatório (pode ser nome ou código)
+            - categoria (str, optional): Filtro por categoria de alimento
+            - modo_preparo (str, optional): Filtro por código de preparo
+    Returns:
+        QuerySet: Lista de objetos IBGEFood ordenados alfabeticamente por descrição, filtrados por:
+            - Termo de busca (no nome OU código)
+            - Categoria (se fornecida)
+            - Modo de preparo (se fornecido)
+    """
+
     lista_alimentos = []
     search = request.POST.get('search')
     categoria = request.POST.get('categoria')
@@ -45,7 +57,6 @@ def listar_alimentos(request):
         request (HttpRequest): Objeto de requisição Django contendo:
             - Método POST com parâmetro 'search' (opcional)
             - Sessão do usuário para verificação de autenticação
-
     Returns:
         HttpResponse: Renderiza 'foods/listar_alimentos.html' com:
             - Lista completa de alimentos (ordem alfabética) OU
@@ -68,6 +79,24 @@ def listar_alimentos(request):
 
 
 def somar_alimentos(request):
+    """
+    Gerencia a lista global de alimentos selecionados e calcula seus valores nutricionais totais,
+    comparando com as necessidades diárias por faixa etária.
+
+    Args:
+        request (HttpRequest): Objeto de requisição Django contendo:
+            - option (str, optional): Define a ação ('inserir' ou 'remover')
+            - food_id (str, optional): ID do alimento para inserção
+            - remove_food_ids (list, optional): IDs dos alimentos para remoção
+    Returns:
+        HttpResponse: Renderiza 'foods/somar_alimentos.html' com:
+            - Lista de alimentos selecionados
+            - Totais nutricionais calculados
+            - Porcentagens das necessidades diárias
+            - Dicas nutricionais para a faixa etária
+        HttpResponseRedirect: Redireciona para 'index' se usuário não autenticado
+    """
+
     global GLOBAL_LIST_FOOD_ID
 
     lista_alimentos = []
@@ -137,6 +166,19 @@ def detalhes_alimento(request):
 
 
 def calcular_nutrientes(list_objects):
+    """
+    Calcula os valores nutricionais totais para uma lista de alimentos, somando os macronutrientes.
+
+    Args:
+        list_objects (QuerySet): Lista de objetos IBGEFood para cálculo nutricional
+    Returns:
+        dict: Dicionário com:
+            - Chaves: Nomes dos campos de macronutrientes (ex: 'proteina_g')
+            - Valores: Listas contendo:
+                [0]: Soma total do nutriente (float)
+                [1]: Nome amigável do nutriente (str, primeira palavra do verbose_name)
+    """
+
     dict_total = {}
     grams = 100
 
@@ -156,6 +198,18 @@ def calcular_nutrientes(list_objects):
 
 
 def calcular_pct(dict_daily_value, dict_current):
+    """
+    Calcula a porcentagem de atendimento das necessidades diárias nutricionais.
+
+    Args:
+        dict_daily_value (dict): Valores diários recomendados (DRIs) para cada nutriente
+        dict_current (dict): Valores atuais consumidos para cada nutriente (formato: {nutriente: [valor, verbose]})
+    Returns:
+        dict: Dicionário com:
+            - Chaves: Nomes dos campos de nutrientes (ex: 'proteina_g')
+            - Valores: Porcentagem (float) do valor diário recomendado (arredondado para 1 decimal)
+    """
+
     dict_pct = {}
     dict_correcao = {
         'fibras_g': 'fibra_alimentar_total_g',

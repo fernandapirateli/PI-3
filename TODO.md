@@ -8,7 +8,7 @@ Exemplo:
 
 ## Adaptação do Projeto para Django
 - [x] Adaptar base do projeto para Django
-- [ ] Avaliar caso de uso para consumir API
+- [x] Avaliar caso de uso para consumir API
 
 ## Apps do Backend
 
@@ -39,15 +39,15 @@ Exemplo:
 
 ### App: Alimentos
 - [x] Modelo
-- [ ] Visão
+- [x] Visão
   - [ ] ~~Registrar~~
   - [ ] ~~Editar~~
   - [ ] ~~Remover~~
   - [x] Listar
   - [x] Pesquisar
-  - [ ] <font style='color : red'>Somar calorias</font>
+  - [x] <font style='color : red'>Somar calorias</font>
 - [x] Rotas
-- [ ] Testes unitários
+- [ ] ~~Testes unitários~~
 - [x] Docstrings
 
 ### App: Cardápio
@@ -98,4 +98,4 @@ Exemplo:
   - [ ] Testar com leitores de tela
 - [ ] Frontend: Testes unitários
 - [ ] Nova conexão com banco de dados (externo ou local)
-- [ ] Garantir um projeto bem documentado
+- [x] Garantir um projeto bem documentado
