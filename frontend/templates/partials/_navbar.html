@@ -1,36 +1,41 @@
 {% load static %}
-<link rel="stylesheet"  href="{% static 'css/app.css' %}" >
+<link rel="stylesheet"   href="{% static 'css/index.css' %}" >
+
+
 <div class="App">
     {% if login == False %}
-        <nav class="navbar">
-            <div class="logo">
-                <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
-            </div>            
+        
+        <div class="logo">
+            <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
+        </div>
+
+        <nav class="navbar">    
             <ul class="nav-links">
-                <li><a href="/">Início</a></li>
-                <li><a href="registrar">Registrar</a></li>
-                <li><a href="logar">Entrar</a></li>
+                <li><a href="/"> Início </a></li>
+                <li><a href="registrar"> Registrar </a></li>
+                <li><a href="logar"> Entrar </a></li>
             </ul>
         </nav>
+
     {% endif %}
+   
+
     {% if login == True %}
-        <nav class="navbar">
-            <li><a href="/">Início</a></li>
-            <div class="logo">
-                <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
-            </div> 
+        <div class="logo">
+            <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
+        </div>
+        <nav class="navbar"> 
             <ul class="nav-links">
-                <li><a href="somar_alimentos">Calculadora</a></li>
-                <li><a href="">Conteúdo</a></li>
-                <li><a href="perfil">Ações do Perfil</a></li>
-                <li><a href="deslogar">Sair</a></li>
+                <li><a href="perfil"> Ações do Perfil </a></li>
+                <li><a href="somar_alimentos"> Calculadora </a></li>
+                <li><a href=""> Conteúdo </a></li>
+                <li><a href="/"> Início </a></li>
+                <li><a href="deslogar"> Sair </a></li>
             </ul>
-        </nav>
+        <a href="#" class="login">{{ user_type }} | {{ user.first_name }}</a>
+    </nav>
+   
     {% endif %}
 </div>
-<div class="">
-    {% if login == True %}
-        <p>{{user_type}} | {{first_name}}</p>
-    {% endif %}
-</div>
+
 

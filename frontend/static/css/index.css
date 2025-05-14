@@ -10,6 +10,78 @@
     --base-font-size: 1rem;
 }
 
+
+.App {
+    margin: 0;
+    padding-top: 0;
+    font-family: sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #d17a17;
+    z-index: 1100;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinha os itens ao topo para o layout de coluna */
+    padding: 10px 20px;
+    height: 60px; /* Ajusta a altura automaticamente */
+    flex-direction: column; /* Organiza os filhos em coluna */
+}
+
+.logo {
+    /* Não precisa de position: fixed aqui se quisermos que ele se mova com a navbar */
+    /* position: absolute; */
+    top: 30px;
+    left: 0;
+    z-index: 1001; /* Garante que fique acima de outros elementos da navbar */
+    display: flex; /* Para centralizar verticalmente a imagem dentro do logo */
+    align-items: center;
+    height: 100%; /* Ocupa a altura da navbar */
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 5px;
+    object-fit: contain;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Alinha os links à direita dentro da ul */
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.login {
+    font-size: 10px;
+    color: white;
+    text-decoration: none;
+    align-self: flex-end; /* Alinha o login à direita dentro do App */
+    margin-right: 20px
+}
+
+
+.login:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
 body{
     margin: 0; /* Remove todas as margens padrão do body */
     font-family: sans-serif;
@@ -52,7 +124,7 @@ form{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10px auto;
+    margin: 5px auto;
     width: 90%;
     max-width: 550px;
     background-color: #fff;
@@ -60,6 +132,10 @@ form{
     padding:0 40px ;
     
 }
+
+
+
+
 label {
     display: flex;
     flex-direction: row;
@@ -76,6 +152,7 @@ label {
 
 
 }
+
 
 
 
@@ -107,7 +184,7 @@ input:focus{
     display: flex;
     justify-content: space-around;
     width: 1200px;
-    margin: 10px auto;
+    margin: 5px auto;
 }
 
 .card_sheet {
@@ -140,6 +217,16 @@ h3:first-of-type {
     margin: 0;
 }
 
+h4 {
+    margin: 20px auto 10px; /* Ajusta a margem superior para compensar o header fixo */
+    max-width: 800px;
+    color: blue;
+    font-size: 10px;
+    text-align: center;
+}
+
+
+
 p:last-of-type {
     font-size: 16px;
     margin: 0;
@@ -154,8 +241,6 @@ p {
     line-height: 1,4;
 
 }
-
-
 
 footer {
     display: flex;
@@ -172,70 +257,19 @@ footer {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.App {
-    margin: 0;
-    padding-top: 60px;
-    font-family: sans-serif;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #d17a17;
-    color: white;
-    padding: 10px 0;
-    z-index: 1000;
-}
-
-.logo {
-    float: right;
-}
-
-.logo img {
-    height: 50px;
-    margin-right: 5px;
-    object-fit: contain;
-    padding: 0;
-    margin: 0;
-}
-
-
-
-
-
-
-
-
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-}
-
-.nav-links li {
-    margin-left: 20px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-}
 
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
+    min-height: 50vh; /* Reduz a altura mínima para 50% da viewport */
+    margin-top: 60; /* Esta linha está duplicada na linha abaixo */
     margin: 0;
     overflow: hidden; /* Impede a barra de rolagem */
 }
+
+
 
 
 
@@ -271,4 +305,10 @@ select {
     height: 20px;
     font-family: "Open sans", sans-serif;
 }
+
+
+
+
+
+
 

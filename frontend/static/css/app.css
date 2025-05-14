@@ -1,19 +1,28 @@
+
+
+
 .App {
-    margin: 0;
+    
     padding-top: 60px;
-    font-family: sans-serif;
-    position: fixed;
+    
+    position: fixed; /* Mantém o App fixo */
     top: 0;
     left: 0;
     width: 100%;
     background-color: #d17a17;
-    color: white;
-    padding: 10px 0;
     z-index: 1000;
+    display: flex; /* Para ajudar no alinhamento de outros elementos dentro do App, se houver */
+    align-items: center; /* Centraliza verticalmente outros elementos dentro do App */
+    justify-content: flex-start; /* Alinha outros elementos à esquerda */
+    padding-left: 60px; /* Espaço à esquerda para outros elementos */
 }
 
 .logo {
-    float: right;
+    position: fixed; /* Fixa o logo na tela */
+    top: 50%;       /* Centraliza verticalmente (metade da altura da tela) */
+    left: 20px;      /* Fixa a 20px da borda esquerda */
+    transform: translateY(-50%); /* Ajusta o posicionamento vertical para centralizar corretamente */
+    z-index: 1001;   /* Garante que fique acima do App */
 }
 
 .logo img {
@@ -22,4 +31,52 @@
     object-fit: contain;
     padding: 0;
     margin: 0;
+}
+
+
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Mantém a organização vertical */
+    padding: 10px 20px;
+}
+
+
+
+.logo img {
+    height: 50px;
+    margin-right: 5px;
+    object-fit: contain;
+    padding: 0;
+    margin: 0;
+}
+
+
+.login:hover {
+    text-decoration: underline;
+}
+
+
+.nav-user-container {
+    display: flex; /* Organiza links e user-info na mesma linha */
+    justify-content: flex-end; /* Alinha os conteúdos à direita */
+    align-items: center; /* Alinha verticalmente os itens (opcional) */
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 20px; /* Adiciona espaço entre os links e user-info */
+}
+
+.span {
+    color: black; /* Define a cor do texto como branco */
+    font-size: inherit; /* Herda o tamanho da fonte do elemento pai (se necessário) */
+    text-decoration: none; /* Remove qualquer decoração de texto */
+    position: fixed; /* Fixa o elemento na janela do navegador */
+    bottom: 10px;   /* Distância da borda inferior (ajuste conforme necessário) */
+    left: 10px;    /* Distância da borda esquerda (ajuste conforme necessário) */
+    z-index: 1001;   /* Garante que fique acima de outros elementos fixos (como o .App) */
 }

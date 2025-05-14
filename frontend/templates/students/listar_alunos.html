@@ -24,7 +24,7 @@
                 <form id='list_students_form' action="{% url 'perfil_aluno' %}" method="POST">
                     {% csrf_token %}
                     <small>{{student.student_name}} | {{student.student_group}}</small>
-                    <button type="submit" class="btn">&#10551;</button>
+                    <button type="submit" class="btn" style="font-size: 200%;">&#9656;</button>
                     <input hidden name="student_id" value="{{student.id}}">
                 </form>
                 {%endfor%}
