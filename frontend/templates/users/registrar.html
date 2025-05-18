@@ -7,7 +7,7 @@
     <nav class="navbar">
         <div class="logo">
             <img src="{% static 'img/CaloKids.png' %}" alt="CaloKids Logo">
-        </div>            
+        </div>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="registrar">Registrar</a></li>
@@ -20,7 +20,7 @@
 {% block content %}
     <section class="container">
         <div class="div-area">
-            <form class="form-area" method="POST">
+            <form id="registrationForm" class="form-area" method="POST">
                 {% csrf_token %}
                 <h1>Cadastro</h1>
                 <hr width="100%" />
@@ -36,10 +36,13 @@
                 <br>
                 <label for="password">Inserir senha</label>
                 <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+
                 <label for="password2">Confirmar senha</label>
                 <input type="password" id="password2" name="password2" placeholder="Repita a senha" disabled>
-                <input type="submit" value="Registrar" class="btn">
+                <button type="submit" class="btn">Registrar</button>
             </form>
         </div>
     </section>
+
 {% endblock %}

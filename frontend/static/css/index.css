@@ -26,7 +26,7 @@
     align-items: flex-start; /* Alinha os itens ao topo para o layout de coluna */
     padding: 10px 20px;
     height: 60px; /* Ajusta a altura automaticamente */
-    flex-direction: column; /* Organiza os filhos em coluna */
+    flex-direction: row; /* Organiza os filhos em coluna */
 }
 
 .logo {
@@ -67,8 +67,10 @@
     font-size: 10px;
     color: white;
     text-decoration: none;
-    align-self: flex-end; /* Alinha o login à direita dentro do App */
-    margin-right: 20px
+    position: absolute; /* Ou 'fixed' se você quiser que ele fique fixo na viewport */
+    top: 40px;        /* Ajuste a distância do topo conforme necessário */
+    right: 20px;      /* Ajuste a distância da direita conforme necessário */
+    z-index: 1002;     /* Garante que fique acima da navbar */
 }
 
 
@@ -117,7 +119,8 @@ button:hover{
    
 
 }
-form{
+
+form {
     display: flex;
     font-family: sans-serif;
     font-size: 1.3em;
@@ -125,12 +128,11 @@ form{
     align-items: center;
     justify-content: center;
     margin: 5px auto;
-    width: 90%;
-    max-width: 550px;
+    /* width: 90%; */
+    /* max-width: 550px; */
     background-color: #fff;
-    border-radius:5px 5px ;
-    padding:0 40px ;
-    
+    border-radius: 5px 5px;
+    padding: 0 40px;
 }
 
 
@@ -139,18 +141,18 @@ form{
 label {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo */
     white-space: nowrap;
     width: 80vw;
     max-width: 500px;
     font-size: calc(0.8 * var(--base-font-size));
-    margin-right: auto;
+    margin-right: auto; /* Remove a margem à direita, útil para centralizar o bloco pai */
+    margin-left: auto;  /* Adiciona margem à esquerda para centralizar o bloco pai */
     margin-bottom: 2px;
     color: #555;
     font-family: "Open sans", sans-serif;
-    line-height: 1.0; /* Reduz o espaçamento entre linhas */
-
-
+    line-height: 1.0;
 }
 
 
@@ -260,14 +262,16 @@ footer {
 
 .container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 50vh; /* Reduz a altura mínima para 50% da viewport */
-    margin-top: 60; /* Esta linha está duplicada na linha abaixo */
-    margin: 0;
-    overflow: hidden; /* Impede a barra de rolagem */
+    justify-content: center; /* Centraliza os itens filhos horizontalmente */
+    align-items: flex-start; /* Alinha os itens ao topo (comportamento padrão de um formulário) */
+    min-height: calc(100vh - 60px); /* Garante que o container ocupe pelo menos a altura da viewport menos a altura do .App */
+    margin: 0 auto; /* Centraliza o container horizontalmente na tela, se sua largura for menor que 100% */
+    width: 100%; /* Opcional: faz o container ocupar a largura total, ajuste conforme necessário */
+    padding-top: 20px; /* Adiciona um pouco de espaço acima do conteúdo */
+    padding-bottom: 20px; /* Adiciona um pouco de espaço abaixo do conteúdo */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura/altura total */
 }
+
 
 
 
@@ -307,8 +311,94 @@ select {
 }
 
 
+.select-all-btn {
+    background: none;
+    border: none;
+    color: #0066cc;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 10px;
+    padding: 0px 0px;
+}
 
+.select-all-btn:hover {
+    color: #004499;
+}
 
+#sidebarRadar {
+    position: sticky;
+    top: 10px;
+    width: 350px;
+    float: right;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 
+#graficoRadar {
+    width: 100% !important;
+    height: auto !important;
+}
 
+.describe-area small {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: right;
+}
 
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.tooltip-label {
+    font-size: 0.75rem;
+    color: #555;
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+.tooltip-box {
+    visibility: hidden;
+    width: 260px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.75rem;
+}
+
+.tooltip-container:hover .tooltip-box {
+    visibility: visible;
+    opacity: 1;
+}
+
+.lista-alunos form#list_students_form {
+    display: flex; /* Habilita o Flexbox para o formulário */
+    flex-direction: row; /* Organiza os itens em linha (horizontalmente) */
+    align-items: center; /* Alinha os itens verticalmente ao centro da linha */
+    margin-bottom: 5px; /* Adiciona um pouco de espaço entre os formulários de alunos */
+}
+
+.lista-alunos form#list_students_form small {
+    flex-grow: 1; /* Permite que o texto cresça para ocupar o espaço disponível */
+    margin-right: 10px; /* Adiciona um espaço entre o texto e o botão */
+}
+
+.lista-alunos form#list_students_form button.btn {
+    flex-shrink: 0; /* Impede que o botão encolha */
+    /* Adicione outros estilos para o seu botão, se necessário */
+}

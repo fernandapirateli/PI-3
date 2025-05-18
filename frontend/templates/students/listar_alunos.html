@@ -24,7 +24,10 @@
                 <form id='list_students_form' action="{% url 'perfil_aluno' %}" method="POST">
                     {% csrf_token %}
                     <small>{{student.student_name}} | {{student.student_group}}</small>
-                    <button type="submit" class="btn" style="font-size: 200%;">&#9656;</button>
+                    <button type="submit" class="btn">&#9656;</button>
+                    
+
+
                     <input hidden name="student_id" value="{{student.id}}">
                 </form>
                 {%endfor%}
@@ -32,4 +35,46 @@
         </div>
     </div>
 </section>
+
+<style>
+    .lista-alunos form#list_students_form {
+    display: flex; /* Habilita o Flexbox para o formulário */
+    flex-direction: row; /* Organiza os itens em linha (horizontalmente) */
+    align-items: center; /* Alinha os itens verticalmente ao centro da linha */
+    margin-bottom: 5px; /* Adiciona um pouco de espaço entre os formulários de alunos */
+}
+
+.lista-alunos form#list_students_form small {
+    flex-grow: 1; /* Permite que o texto cresça para ocupar o espaço disponível */
+    margin-right: 10px; /* Adiciona um espaço entre o texto e o botão */
+}
+
+
+.lista-alunos form#list_students_form button.btn {
+    flex-shrink: 0; /* Impede que o botão encolha */
+    font-size: 0.8em; /* Reduz o tamanho da fonte para metade do padrão */
+    padding: 2px 5px; /* Ajusta o padding vertical e horizontal para um botão menor */
+    height: auto; /* Permite que a altura se ajuste ao conteúdo */
+    line-height: normal; /* Garante que a altura da linha não infle o botão */
+    /* Outros estilos para o seu botão */
+}
+
+
+</style>
+
+{% if lista_alunos %}
+    <script>
+        document.getElementById('pesquisar-aluno').style.display = 'none';
+        document.getElementById('lista-alunos').style.display = 'block';
+    </script>
+{% else %}
+    <script>
+        document.getElementById('pesquisar-aluno').style.display = 'block';
+        document.getElementById('lista-alunos').style.display = 'none';
+    </script>
+{% endif %}
+
+
+
+
 {% endblock %}
