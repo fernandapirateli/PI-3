@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 import environ
+import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -63,16 +65,13 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': env('DATABASE_ENG'),
-#         'NAME': env('DATABASE_NAME'),
-#         'USER': env('DATABASE_USER'),
-#         'PASSWORD': env('DATABASE_PASS'),
-#         'HOST': env('DATABASE_HOST'),
-#         'PORT': env('DATABASE_PORT')
-#     }
-# }
+if 'DATABASE_URL' in os.environ:
+    db_from_env = dj_database_url.config(
+        conn_max_age=500,
+        conn_health_checks=True,
+        ssl_require=True
+    )
+    DATABASES['default'].update(db_from_env)
 
 AUTH_USER_MODEL = 'users.User'
 AUTH_PASSWORD_VALIDATORS = [
@@ -100,3 +99,13 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [Path(BASE_DIR).joinpath('../frontend/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+if 'DATABASE_URL' in os.environ:
+    try:
+        import psycopg2
+        conn = psycopg2.connect(os.environ['DATABASE_URL'])
+        print("✅ Conexão com PostgreSQL externo (Railway) bem-sucedida.")
+        conn.close()
+    except Exception as e:
+        print(f"❌ Falha na conexão: {e}")

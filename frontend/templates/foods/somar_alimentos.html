@@ -1,80 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-
 <section class="container">
-
-    <form class="form-area" id="pesquisar-alimento" action="{% url 'somar_alimentos' %}" method="POST">
-        {% csrf_token %}
-        <h1>Pesquisa avançada</h1>
-        <hr width="100%" />
-        <label for="">Forneça a descrição ou o código de um alimento</label>
-        <div class="lista-alimentos">
-            <input name="search" placeholder="Feijão-de-corda" required>
-        </div>
-        <label for="categoria">Categoria</label>
-        <select id="categoria" name="categoria">
-            <option disabled selected value>-- selecione uma opção --</option>
-            {% for verbose in categoria_choices %}
-            <option value="{{verbose}}">{{verbose}}</option>
-            {% endfor %}
-        </select>
-        <label for="modo_preparo">Modo de preparo</label>
-        <select id="modo_preparo" name="modo_preparo">
-            <option disabled selected value>-- selecione uma opção --</option>
-            {% for key, verbose in modo_preparo_choices %}
-            <option value="{{key}}">{{verbose}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" class="btn" value="Pesquisar">
-    </form>
-    {% if lista_alimentos %}
-    <div class="list_foods_form" id="lista-alimentos">
-        {% csrf_token %}
-        <h1>Resultados</h1>
-        <hr width="100%" />
-        <label for="">Selecione um alimento para incluí-lo à uma receita</label>
-        <div class="lista-alimentos">
-            {%for food in lista_alimentos%}
-            <form id='list_foods_form' action=" " method="POST">
-                {% csrf_token %}
-                <small>{{food.descricao_do_alimento}} | {{food.categoria}} | {{food.descricao_da_preparacao}}</small>
-                <small>Calorias: {{food.energia_kcal}}</small>
-                <button type="submit" class="btn">&#x2713;</button>
-                <input hidden name="food_id" value="{{food.id}}">
-                <input hidden name="option" value="inserir">
-            </form>
-            {%endfor%}
-        </div>
-    </div>
-    {% endif %}
-
-
     <div class="div-area">
 
+        <form class="form-area" id="pesquisar-alimento" action="{% url 'somar_alimentos' %}" method="POST">
+            {% csrf_token %}
+            <h1>Pesquisa avançada</h1>
+            <hr width="100%" />
+            <label for="">Forneça a descrição ou o código de um alimento</label>
+            <div class="lista-alimentos">
+                <input name="search" placeholder="Feijão-de-corda" required>
+            </div>
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria">
+                <option disabled selected value>-- selecione uma opção --</option>
+                {% for verbose in categoria_choices %}
+                <option value="{{verbose}}">{{verbose}}</option>
+                {% endfor %}
+            </select>
+            <label for="modo_preparo">Modo de preparo</label>
+            <select id="modo_preparo" name="modo_preparo">
+                <option disabled selected value>-- selecione uma opção --</option>
+                {% for key, verbose in modo_preparo_choices %}
+                <option value="{{key}}">{{verbose}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn" value="Pesquisar">
+        </form>
 
-
-
-
-        
-
-    <form class="form-area" id="remove_food" action="{% url 'somar_alimentos' %}" method="POST">
+        <form class="form-area" id="remove_food" action="{% url 'somar_alimentos' %}" method="POST">
             {% csrf_token %}
             <div class="table-area">
-                 <h1>Macronutrientes</h1>
-                 <hr width="100%" />
                 <table class="listed-foods">
                     <thead>
                         <tr>
                             <th>Descrição</th>
-                            <th>Valor Calórico</th>                            
+                            <th>Valor Calórico</th>
                             <th>
+                                Remover
                                 {% if list_objects %}
-                                <button type="button" id="select-all" class="select-all-btn">Remover Item / Selecionar todos</button>
-                                
+                                <button type="button" id="select-all" class="select-all-btn">Selecionar todos</button>
                                 {% endif %}
-                                
                             </th>
                         </tr>
                     </thead>
@@ -92,7 +59,7 @@
                         {% endfor %}
                         {% else %}
                         <tr>
-                            <td colspan="3" style="font-size: 15px;">Não constam ingredientes ou refeições selecionadas.</td>
+                            <td colspan="3">Não constam ingredientes ou refeições selecionadas.</td>
                         </tr>
                         {% endif %}
                     </tbody>
@@ -101,9 +68,8 @@
             {% if list_objects %}
             <hr width="100%" />
             <div class="table-area">
-                
                 <table class="macronutrientes-table">
-                    <caption>Totais (por 100g)</caption>
+                    <caption>Totais em macronutrientes (por 100g)</caption>
                     <thead>
                         <tr>
                             {% for total, verbose in dict_total.values %}
@@ -129,9 +95,29 @@
             {% endif %}
         </form>
 
+        {% if lista_alimentos %}
+        <div class="list_foods_form" id="lista-alimentos">
+            {% csrf_token %}
+            <h1>Resultados</h1>
+            <hr width="100%" />
+            <label for="">Selecione um alimento para incluí-lo à uma receita</label>
+            <div class="lista-alimentos">
+                {%for food in lista_alimentos%}
+                <form id='list_foods_form' action=" " method="POST">
+                    {% csrf_token %}
+                    <small>{{food.descricao_do_alimento}} | {{food.categoria}} | {{food.descricao_da_preparacao}}</small>
+                    <small>Calorias: {{food.energia_kcal}}</small>
+                    <button type="submit" class="btn">&#x2713;</button>
+                    <input hidden name="food_id" value="{{food.id}}">
+                    <input hidden name="option" value="inserir">
+                </form>
+                {%endfor%}
+            </div>
+        </div>
+        {% endif %}
+    </div>
 
-        {% if list_objects %}
-
+    {% if list_objects %}
         <div id="sidebarRadar">
             <canvas id="graficoRadar"></canvas>
             <div class="describe-area" id="describe-area">
@@ -143,22 +129,119 @@
                     {{dict_pct.fibra_alimentar_total_g}}% de fibras e
                     {{dict_pct.energia_kcal}}% do valor energético total para a faixa etária de 4 a 8 anos."
                 </small>
-
                 <div class="tooltip-container">
                     <span class="tooltip-label">Observações</span>
                     <div class="tooltip-box">{{ tips }}</div>
                 </div>
-
             </div>
         </div>
-        {% endif %}
-
-    </div>
-
-
-
-
+    {% endif %}
 </section>
+
+<style>
+    .form-area {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .select-all-btn {
+        background: none;
+        border: none;
+        color: #0066cc;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 0.6em;
+        margin-left: 10px;
+        padding: 0px 0px;
+    }
+
+    .select-all-btn:hover {
+        color: #004499;
+    }
+
+    #sidebarRadar {
+        position: sticky;
+        top: 10px;
+        width: 300px;
+        float: right;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    #graficoRadar {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .describe-area small {
+        display: block;
+        margin-top: 10px;
+        color: #333;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: right;
+    }
+
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .tooltip-label {
+        font-size: 0.75rem;
+        color: #555;
+        text-decoration: underline dotted;
+        cursor: help;
+    }
+
+    .tooltip-box {
+        visibility: hidden;
+        width: 260px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-align: left;
+        border-radius: 6px;
+        padding: 10px;
+        position: absolute;
+        z-index: 10;
+        bottom: 125%;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 0.75rem;
+    }
+
+    .tooltip-container:hover .tooltip-box {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .lista-alimentos form#list_foods_form {
+        display: flex; /* Habilita o Flexbox para o formulário */
+        flex-direction: row; /* Organiza os itens em linha (horizontalmente) */
+        align-items: center; /* Alinha os itens verticalmente ao centro da linha */
+        margin-right: 10px; /* Adiciona um espaço entre os itens da lista (formulários) */
+        font-size: 15px; /* Define o tamanho da fonte para os elementos dentro do formulário */
+    }
+
+    .lista-alimentos form#list_foods_form small {
+        flex-grow: 1; /* Permite que o texto cresça para ocupar o espaço disponível */
+        margin-right: 10px; /* Adiciona um espaço entre o texto e o botão */
+    }
+
+    .lista-alimentos form#list_foods_form button.btn {
+        flex-shrink: 0;
+        font-size: 0.5em; /* Reduz o tamanho da fonte pela metade */
+        padding: 0.1em 0.3em; /* Mantenha ou ajuste o padding (0.5em seria muito pequeno) */
+        height: auto; /* Permite que a altura se ajuste ao conteúdo com o padding reduzido */
+        line-height: normal; /* Mantém a linha de altura normal para a fonte reduzida */
+        width: auto; /* Permite que a largura se ajuste ao conteúdo com o padding reduzido */
+        /* Outros estilos que você possa ter para o botão */
+    }
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -173,7 +256,7 @@
                 checkbox.checked = allSelected;
             });
 
-            selectAllBtn.textContent = allSelected ? 'Desmarcar todos' : 'Remover Item / Selecionar todos';
+            selectAllBtn.textContent = allSelected ? 'Desmarcar todos' : 'Selecionar todos';
         });
     });
 
@@ -238,277 +321,4 @@
     // Chama a função ao carregar
     renderRadarChart();
 </script>
-
-<style>
-
-   .container {
-        display: flex;
-        justify-content: center; /* Centraliza os itens filhos horizontalmente */
-        align-items: flex-start; /* Alinha os itens ao topo (comportamento padrão de um formulário) */
-        min-height: calc(100vh - 60px); /* Garante que o container ocupe pelo menos a altura da viewport menos a altura do .App */
-        margin: 0 auto; /* Centraliza o container horizontalmente na tela, se sua largura for menor que 100% */
-        width: 100%; /* Opcional: faz o container ocupar a largura total, ajuste conforme necessário */
-        padding-top: 0px; /* Adiciona um pouco de espaço acima do conteúdo */
-        padding-bottom: 0px; /* Adiciona um pouco de espaço abaixo do conteúdo */
-        box-sizing: border-box; /* Garante que o padding não aumente a largura/altura total */
-        height: calc(100vh - 60px); /* Reduz a altura em 100 pixels */
-    }
-
-    .form-area {
-        padding: 5px;
-        box-sizing: border-box;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        margin-bottom: 10px; /* Adicione uma margem inferior padrão para separar os formulários */
-    }
-
-    .form-area#pesquisar-alimento {
-        width: 25%;
-        margin: 0 auto 10px auto; /* Centraliza e adiciona margem inferior */
-    }
-
-    .form-area label {
-        display: block;
-        text-align: left; /* Centraliza o texto das labels em ambos os formulários */
-        margin-bottom: 5px;
-        margin-left: 10px; /* Remove a margem esquerda específica */
-    }
-
-    .select option {
-        color: #333; /* Define uma cor de texto escura como exemplo */
-    }
-
-
-    .div-area {
-        width: 100%;
-        margin-top: 0px; /* Garante que não haja margem superior no div-area */
-        padding: 5px; /* Mantenha o padding se desejar um espaço interno */
-        box-sizing: border-box;
-        display: flex; /* Habilita o Flexbox */
-        flex-direction: row; /* Organiza os filhos em linha */
-        align-items: flex-start; /* Alinha os filhos ao topo */
-         min-height: calc(100vh - 100px);
-    }
-
-    .form-area#remove_food {
-        width: 45%; /* Define a mesma largura do formulário de pesquisa */
-        margin-right: auto; /* Garante que fique alinhado à esquerda se o div-area for flex */
-        margin-left: auto; /* Garante que fique centralizado se o div-area não for flex com justify-content */
-        font-size: 10px; /* Ajuste o tamanho da fonte para corresponder ou ser mais consistente */
-        display: block; /* Remove o comportamento flex e column */
-        align-items: initial; /* Remove o align-items */
-    }
-
-    .form-area#remove_food .listed-foods th,
-    .form-area#remove_food .listed-foods th {
-        font-size: 10px; /* Mantenha o tamanho da fonte menor */
-        padding-top: 3px; /* Reduza o padding superior */
-        padding-bottom: 3px; /* Reduza o padding inferior */
-        padding-left: 5px; /* Mantenha ou ajuste o padding esquerdo */
-        padding-right: 5px; /* Mantenha ou ajuste o padding direito */
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.2; /* Opcional: ajuste a altura da linha do texto */
-    }
-
-    .form-area#remove_food .listed-foods td {
-        font-size: 10px;
-        padding: 5px; /* Mantenha ou ajuste o padding das células de dados */
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-
-    .form-area#remove_food .listed-foods th:nth-child(1), /* Para a coluna de descrição */
-    .form-area#remove_food .listed-foods td:nth-child(1) {
-        width: 60%; /* Ajuste a largura conforme necessário para a descrição */
-    }
-
-    .form-area#remove_food .listed-foods th:nth-child(2), /* Para a coluna de valor calórico */
-    .form-area#remove_food .listed-foods td:nth-child(2) {
-        width: 20%; /* Ajuste a largura conforme necessário para o valor calórico */
-        text-align: center; /* Centralize o valor calórico */
-    }
-
-    .form-area#remove_food .listed-foods th:nth-child(3), /* Para a coluna do checkbox */
-    .form-area#remove_food .listed-foods td:nth-child(3) {
-        width: 20%; /* Ajuste a largura conforme necessário para o checkbox */
-        text-align: center; /* Centralize o checkbox */
-    }
-
-    .food-checkbox {
-        width: 12px; /* Reduza a largura do input checkbox */
-        height: 12px; /* Reduza a altura do input checkbox */
-        margin: 0; /* Remova margens desnecessárias */
-        padding: 0;
-        vertical-align: middle; /* Alinhe verticalmente com o texto, se houver */
-    }
-
-    .check-box-foods {
-        padding: 0 !important; /* Remova o padding padrão da célula do checkbox */
-        text-align: center; /* Centralize o checkbox na célula */
-    }
-
-
-
-
-
-    /* Estilos para a tabela de macronutrientes */
-    .form-area#remove_food .table-area .macronutrientes-table th,
-    .form-area#remove_food .table-area .macronutrientes-table td {
-        font-size: 15px; /* Tamanho da fonte igual ao td de listed-foods */
-        padding: 8px; /* Padding igual ao td de listed-foods */
-        text-align: left; /* Alinhamento do texto à esquerda */
-        border-bottom: 1px solid #eee; /* Borda inferior sutil */
-    }
-
-    .form-area#remove_food .table-area .macronutrientes-table thead th {
-        font-size: 13px; /* Tamanho da fonte igual ao th de listed-foods */
-        padding-bottom: 8px; /* Adiciona um pouco de espaço abaixo do cabeçalho */
-        border-bottom: 2px solid #ccc; /* Borda inferior mais forte para o cabeçalho */
-    }
-
-    .form-area#remove_food .table-area .macronutrientes-table tbody tr:last-child td {
-        border-bottom: none; /* Remove a borda inferior da última linha do body */
-    }
-
-    .food-checkbox {
-        width: 15x;
-        height: 15px;
-    }
-
-
-    .sidebar-area {
-        width: 300px; /* Defina uma largura fixa para a sidebar (ajuste conforme necessário) */
-        flex-shrink: 0;
-        position: sticky;
-        top: 20px;
-        max-height: calc(100vh - 60px); /* Reduza o valor subtraído */
-        overflow-y: auto;
-        padding: 10px; /* Adicione um pouco de padding interno para os elementos não grudarem nas bordas */
-        box-sizing: border-box; /* Garante que o padding não aumente a largura total */
-    }
-
-    
-
-#graficoRadar {
-    width: 100% !important; /* Ocupa toda a largura da sidebarRadar */
-    height: auto !important;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-.describe-area {
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 0.8em; /* Reduza o tamanho da fonte */
-}
-
-
-    .select-all-btn {
-        background: none;
-        border: none;
-        color: #0066cc;
-        text-decoration: underline;
-        cursor: pointer;
-        font-size: 0.7em;
-        margin-left: 7px;
-        padding: 0px 0px;
-    }
-
-    .select-all-btn:hover {
-        color: #004499;
-    }
-
-    #graficoRadar {
-        width: 100% !important;
-        height: auto !important;
-    }
-
-.describe-area small {
-    display: block;
-    margin-top: 8px; /* Reduza a margem */
-    color: #333;
-    line-height: 1.2; /* Reduza a altura da linha */
-    font-size: 0.7em; /* Reduza o tamanho da fonte */
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.tooltip-container {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 5px; /* Reduza a margem superior */
-    text-align: left;
-}
-
-.tooltip-label {
-    font-size: 0.65rem; /* Reduza o tamanho da fonte */
-    color: #555;
-    text-decoration: underline dotted;
-    cursor: help;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    text-align: left;
-}
-
-.tooltip-box {
-    visibility: hidden;
-    width: 100%; /* Ocupa a largura total do container */
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    text-align: left;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    z-index: 10;
-    bottom: 125%;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-size: 0.75rem;
-    box-sizing: border-box;
-    padding: 8px; /* Reduza o padding */
-}
-
-.tooltip-container:hover .tooltip-box {
-    visibility: visible;
-    opacity: 1;
-}
-
-.lista-alimentos form#list_foods_form {
-    display: flex; /* Habilita o Flexbox para o formulário */
-    flex-direction: row; /* Organiza os itens em linha (horizontalmente) */
-    align-items: center; /* Alinha os itens verticalmente ao centro da linha */
-    margin-right: 10px; /* Adiciona um espaço entre os itens da lista (formulários) */
-    font-size: 15px; /* Define o tamanho da fonte para os elementos dentro do formulário */
-}
-
-.lista-alimentos form#list_foods_form small {
-    flex-grow: 1; /* Permite que o texto cresça para ocupar o espaço disponível */
-    margin-right: 10px; /* Adiciona um espaço entre o texto e o botão */
-}
-
-.lista-alimentos form#list_foods_form button.btn {
-    flex-shrink: 0;
-    font-size: 0.5em; /* Reduz o tamanho da fonte pela metade */
-    padding: 0.1em 0.3em; /* Mantenha ou ajuste o padding (0.5em seria muito pequeno) */
-    height: auto; /* Permite que a altura se ajuste ao conteúdo com o padding reduzido */
-    line-height: normal; /* Mantém a linha de altura normal para a fonte reduzida */
-    width: auto; /* Permite que a largura se ajuste ao conteúdo com o padding reduzido */
-    /* Outros estilos que você possa ter para o botão */
-}
-
-
-
-
-
-
-</style>
-
 {% endblock %}

@@ -97,5 +97,5 @@ Exemplo:
   - [ ] Verificar contraste de cores
   - [ ] Testar com leitores de tela
 - [ ] Frontend: Testes unitários
-- [ ] Nova conexão com banco de dados (externo ou local)
+- [x] Nova conexão com banco de dados (externo ou local)
 - [x] Garantir um projeto bem documentado

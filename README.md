@@ -18,7 +18,9 @@ será preciso executar o comando ```python manage.py migrate```.
 
 ### Base de dados de alimentos
 
-Para popular a tabela de alimentos* basta executar o comando ```python manage.py load_ibge_data``` e esperar. 
+Para popular a tabela de alimentos* basta executar o comando ```python manage.py load_ibge_data``` e aguardar.
+Caso o banco de dados seja em nuvem, pode requerer mais tempo.
+
 Normalmente, essa é uma ação a qual deve ser executada somente uma vez.
 
 ### Tabela IBGE de Alimentos 
