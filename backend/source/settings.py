@@ -65,13 +65,13 @@ DATABASES = {
     }
 }
 
-if 'DATABASE_URL' in os.environ:
-    db_from_env = dj_database_url.config(
-        conn_max_age=500,
-        conn_health_checks=True,
-        ssl_require=True
-    )
-    DATABASES['default'].update(db_from_env)
+# if 'DATABASE_URL' in os.environ:
+#     db_from_env = dj_database_url.config(
+#         conn_max_age=500,
+#         conn_health_checks=True,
+#         ssl_require=True
+#     )
+#     DATABASES['default'].update(db_from_env)
 
 AUTH_USER_MODEL = 'users.User'
 AUTH_PASSWORD_VALIDATORS = [
