@@ -15,10 +15,10 @@ class Student(models.Model):
     student_group = models.ForeignKey('Group', on_delete=models.CASCADE)
     student_gender = models.CharField(max_length=1, default='N/A')
     student_age = models.IntegerField(default=0)  # em meses (o ideal seria data nascimento)
-    student_height = metric_field('Peso (g)')
-    student_weight = metric_field('Altura (cm)')
+    student_height = metric_field('Altura (cm)')
+    student_weight = models.IntegerField(default=0, verbose_name='Peso (g)')
 
-# ajeitar formulários, principalmente de cadastro
+# ajeitar formulários de cadastro
 
     def __str__(self):
         return self.student_name
