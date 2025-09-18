@@ -21,6 +21,27 @@
             <label for="student_diet_restriction" >Restrição alimentar</label>
             <textarea id="student_diet_restriction" name="student_diet_restriction"
                    placeholder="Ex.: Lactose; Alfafa" rows="6" cols="40">{{student.student_diet_restriction}}</textarea>
+            <br>
+            <label for="student_gender">Sexo do aluno</label>
+            <select id="student_gender" name="student_gender" required>
+                {% for key, verbose in sex_biological_choices %}
+                {% if key == student.student_gender %}
+                <option value="{{key}}" selected>{{verbose}}</option>
+                {% else %}
+                <option value="{{key}}">{{verbose}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <br>
+            <label for="student_age">Idade do aluno (em meses)</label>
+            <input type="text" id="student_age" name="student_age" value="{{student.student_age}}">
+            <br>
+            <label for="student_height">Altura (em centímetros)</label>
+            <input type="text" id="student_height" name="student_height" value="{{student.student_height}}">
+            <br>
+            <label for="student_weight">Peso (em gramas)</label>
+            <input type="text" id="student_weight" name="student_weight" value="{{student.student_weight}}">
+            <br>
             <input type="text" name="student_id" value="{{student.id}}" hidden>
             <input type="text" name="option" value="editar_salvar" hidden>
         </form>
