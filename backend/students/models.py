@@ -18,8 +18,6 @@ class Student(models.Model):
     student_height = metric_field('Altura (cm)')
     student_weight = models.IntegerField(default=0, verbose_name='Peso (g)')
 
-# ajeitar formulários de cadastro
-
     def __str__(self):
         return self.student_name
 

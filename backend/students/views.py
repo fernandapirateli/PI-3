@@ -126,6 +126,7 @@ def registrar_aluno(request):
     else:
         contexto = gerir_contexto(request)
         if contexto['login']:
+            contexto['sex_biological_choices'] = SEX_BIOLOGICAL
             return render(request, 'students/registrar_aluno.html', contexto)
 
         else:

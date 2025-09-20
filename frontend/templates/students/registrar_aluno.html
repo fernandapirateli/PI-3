@@ -10,17 +10,33 @@
             <p>Para efetuar o cadastro, digite os seus dados nos campos abaixo.</p>
             <label for="student_name">Nome completo do aluno</label>
             <input type="text" id="student_name" name="student_name"
-                   placeholder="Ex.: Jericó de Mello" required autofocus>
+                   placeholder="Ex.: Ada Lovelace" required autofocus>
             <br>
             <label for="student_ra" >RA</label>
-            <input type="text" id="student_ra" name="student_ra" placeholder="Ex.: 0001112223344-2" required>
+            <input type="text" id="student_ra" name="student_ra" placeholder="Ex.: 00011122233442" required>
             <br>
             <label for="group_name" >Turma</label>
-            <input type="text" id="group_name" name="group_name" placeholder="" required>
+            <input type="text" id="group_name" name="group_name" placeholder="2ª Série C" required>
             <br>
             <label for="student_diet_restriction" >Restrição alimentar</label>
             <textarea id="student_diet_restriction" name="student_diet_restriction" rows="6" cols="40"
                    placeholder="Ex.: Lactose; Alfafa"></textarea>
+            <br>
+            <label for="student_gender">Sexo do aluno</label>
+            <select id="student_gender" name="student_gender" required>
+                {% for key, verbose in sex_biological_choices %}
+                <option value="{{key}}">{{verbose}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="student_age">Idade do aluno (em meses)</label>
+            <input type="text" id="student_age" name="student_age" placeholder="Ex.: 163">
+            <br>
+            <label for="student_height">Altura (em centímetros)</label>
+            <input type="text" id="student_height" name="student_height" placeholder="Ex.: 129.34">
+            <br>
+            <label for="student_weight">Peso (em gramas)</label>
+            <input type="text" id="student_weight" name="student_weight" placeholder="Ex.: 22934">
             <br>
             <input type="text" name="option" value="registrar_salvar" hidden>
             <input type="submit" value="Registrar" class="btn">
