@@ -402,3 +402,23 @@ select {
     flex-shrink: 0; /* Impede que o botão encolha */
     /* Adicione outros estilos para o seu botão, se necessário */
 }
+
+
+.indicator {
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+    text-shadow: 2px 2px 5px black;
+}
+
+.solid-arrow, .circle {
+    filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.2));
+}
+
+.blue-dark { color: #0000FF; }
+.blue-light { color: #87CEEB; }
+.green { color: #00FF00; }
+.red-light { color: #FF6B6B; }
+.red-dark { color: #FF0000; }
+</style>

@@ -19,6 +19,12 @@
             <label for="student_diet_restriction">Restrição alimentar</label>
             <p id="student_diet_restriction">{{student.student_diet_restriction}}</p>
             <br>
+            <label for="student_imc">IMC</label>
+            <p id="student_imc">{{student.bmi}}</p>
+            <br>
+            <label for="student_classification">Classificação</label>
+            <p id="student_classification">{{student.classification}}</p>
+            <br>
         </form>
         <form id='form_editar_aluno' action="{% url 'gerir_aluno' %}" method="POST">
             {% csrf_token %}

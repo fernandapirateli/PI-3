@@ -170,6 +170,9 @@ def listar_alunos(request):
     else:
         if contexto['login']:
             lista_alunos = Student.objects.order_by('student_name').all()
+
+            # classificar em tempo real, todos os alunos
+            lista_alunos = [classificar_sujeito(aluno) for aluno in lista_alunos]
         else:
             return redirect('index')
 
@@ -293,6 +296,6 @@ def classificar_sujeito(sujeito):
 
     # efetuar previsão
     classificacao = model.predict(amostra_scaled)[0]
-    sujeito.classificacao, sujeito.imc = classificacao, round(imc, 1)
+    sujeito.classification, sujeito.bmi = classificacao, round(imc, 1)
 
     return sujeito

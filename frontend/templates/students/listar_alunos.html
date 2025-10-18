@@ -23,11 +23,21 @@
                 {%for student in lista_alunos%}
                 <form id='list_students_form' action="{% url 'perfil_aluno' %}" method="POST">
                     {% csrf_token %}
-                    <small>{{student.student_name}} | {{student.student_group}}</small>
+                    <small>
+                        {% if student.classification == 'Muito Abaixo do Peso' %}
+                            <span class="indicator solid-arrow blue-dark">⬇</span>
+                        {% elif student.classification == 'Abaixo do Peso' %}
+                            <span class="indicator solid-arrow blue-light">⬇</span>
+                        {% elif student.classification == 'Peso Adequado' %}
+                            <span class="indicator circle green">●</span>
+                        {% elif student.classification == 'Sobrepeso' %}
+                            <span class="indicator solid-arrow red-light">⬆</span>
+                        {% elif student.classification == 'Obesidade' %}
+                            <span class="indicator solid-arrow red-dark">⬆</span>
+                        {% endif %}
+                        {{student.student_name}} | {{student.student_group}}
+                    </small>
                     <button type="submit" class="btn">&#9656;</button>
-                    
-
-
                     <input hidden name="student_id" value="{{student.id}}">
                 </form>
                 {%endfor%}
