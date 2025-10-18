@@ -59,7 +59,8 @@ def salvar_aluno(request):
     student_diet_restriction = request.POST.get('student_diet_restriction')
     group_name = request.POST.get('group_name')
     student_gender = request.POST.get('student_gender')
-    student_age = request.POST.get('student_age')
+    student_age = request.POST['student_age']
+    print(student_age)
     student_height = request.POST.get('student_height')
     student_weight = request.POST.get('student_weight')
     option = request.POST.get('option')
@@ -93,9 +94,9 @@ def salvar_aluno(request):
             student.student_ra = student_ra
             student.student_name = student_name
             student.student_diet_restriction = student_diet_restriction
-            student.student_gender = student_gender,
-            student.student_age = student_age,
-            student.student_height = student_height,
+            student.student_gender = student_gender
+            student.student_age = student_age
+            student.student_height = student_height
             student.student_weight = student_weight
             student.save()
             return student.student_name, group_name
