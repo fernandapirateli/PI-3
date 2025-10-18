@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Student, Group
 from users.views import gerir_contexto
 from .class_private import SEX_BIOLOGICAL
+import numpy as np
+import joblib
+import pandas as pd
 
 
 def registrar_turma(group_name):
@@ -191,7 +194,11 @@ def perfil_aluno(request):
     if request.method == 'POST':
         contexto = gerir_contexto(request)
         student_id = request.POST.get('student_id')
-        contexto['student'] = Student.objects.get(pk=student_id)
+        aluno = Student.objects.get(pk=student_id)
+
+        # inserindo dois novos atributos não persistentes à instância
+        contexto['student'] = classificar_sujeito(aluno)
+
         return render(request, 'students/perfil_aluno.html', contexto)
 
     else:
@@ -254,3 +261,38 @@ def excluir_aluno(student_id):
         name, group = student.student_name, student.student_group
         student.delete()
         print(f'O registro do(a) aluno(a) {name}, da turma {group} foi excluído com sucesso')
+
+
+def calc_imc(altura, peso):
+    return (peso/1000) / ((altura/100) ** 2)
+
+
+def classificar_sujeito(sujeito):
+    '''Recebe a instância ou dicionário, extrai dados antropométricos, calcula o IMC,
+    aplica a classificação pelo modelo de aprendizado de máquina,
+    inclui os novos atributos não persistentes à instância e o devolve'''
+
+    # obter dados da instância
+    genero = sujeito.student_gender
+    idade = sujeito.student_age
+    altura = sujeito.student_height
+    peso = sujeito.student_weight
+
+    # carregar modelo salvo
+    model = joblib.load('modelo/modelo_random_forest.pkl')
+    scaler = joblib.load('modelo/scaler.pkl')
+    le = joblib.load('modelo/label_encoder.pkl')
+
+    # preparando os dados
+    genero_encoded = le.transform([genero])[0]
+    imc = calc_imc(altura, peso)
+
+    amostra = pd.DataFrame(np.array([[genero_encoded, idade, altura, peso, imc]]),
+                           columns=['student_gender_encoded', 'student_age', 'student_height', 'student_weight', 'imc'])
+    amostra_scaled = scaler.transform(amostra)
+
+    # efetuar previsão
+    classificacao = model.predict(amostra_scaled)[0]
+    sujeito.classificacao, sujeito.imc = classificacao, round(imc, 1)
+
+    return sujeito
