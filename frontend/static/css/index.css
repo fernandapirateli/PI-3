@@ -80,10 +80,6 @@
 
 
 
-
-
-
-
 body{
     margin: 0; /* Remove todas as margens padrão do body */
     font-family: sans-serif;
@@ -109,15 +105,11 @@ button[disabled]{
 }
 
 button:hover{
-    
     border-radius: 10px ;
-    
     font-family: "Open sans";
     font-weight: bold;
     border: 7px #080404;
     margin: 10px;
-   
-
 }
 
 form {
@@ -136,8 +128,6 @@ form {
 }
 
 
-
-
 label {
     display: flex;
     flex-direction: row;
@@ -147,15 +137,11 @@ label {
     width: 80vw;
     max-width: 500px;
     font-size: calc(0.8 * var(--base-font-size));
-    margin-right: auto; /* Remove a margem à direita, útil para centralizar o bloco pai */
-    margin-left: auto;  /* Adiciona margem à esquerda para centralizar o bloco pai */
-    margin-bottom: 2px;
+    margin: 10px auto 4px;     /* valor 1: topo, 2: esquerda e direita, 3: fundo */
     color: #555;
     font-family: "Open sans", sans-serif;
     line-height: 1.0;
 }
-
-
 
 
 input::placeholder{
@@ -170,10 +156,6 @@ input{
     margin:10px;
     width: 90%;
 }
-select{
-    width: 90%;
-}
-
 
 input:focus{
     
@@ -203,8 +185,6 @@ img {
     border-radius: 15px;
 }
 
-
-
 h1 {
     margin: 20px auto 10px; /* Ajusta a margem superior para compensar o header fixo */
     max-width: 800px;
@@ -227,27 +207,22 @@ h4 {
     text-align: center;
 }
 
-
-
 p:last-of-type {
     font-size: 16px;
     margin: 0;
 }
 
 p {
-    margin: 20px auto 10px; /* Ajusta a margem superior para compensar o header fixo */
+    margin: 5px auto 10px;
     color: black;
     font-size: 16px;
     text-align: center;
-    margin-bottom: 6px;
     line-height: 1,4;
-
 }
 
 footer {
     display: flex;
     justify-content: space-around;
-   
 }
 
 .info {
@@ -273,10 +248,6 @@ footer {
 }
 
 
-
-
-
-
 input[type="text"],
 input[type="password"],
 select {
@@ -288,7 +259,6 @@ select {
     box-sizing: border-box;
     font-family: "Open sans", sans-serif;
     line-height: 1.0; /* Reduz o espaçamento entre linhas */
-    
 }
 
 input[type="submit"] {
@@ -306,10 +276,9 @@ input[type="submit"]:hover {
 }
 
 select {
-    height: 20px;
+    height: 30px;
     font-family: "Open sans", sans-serif;
 }
-
 
 .select-all-btn {
     background: none;
@@ -402,7 +371,6 @@ select {
     flex-shrink: 0; /* Impede que o botão encolha */
     /* Adicione outros estilos para o seu botão, se necessário */
 }
-
 
 .indicator {
     font-size: 2em;
