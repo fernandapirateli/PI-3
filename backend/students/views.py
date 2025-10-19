@@ -60,7 +60,6 @@ def salvar_aluno(request):
     group_name = request.POST.get('group_name')
     student_gender = request.POST.get('student_gender')
     student_age = request.POST['student_age']
-    print(student_age)
     student_height = request.POST.get('student_height')
     student_weight = request.POST.get('student_weight')
     option = request.POST.get('option')

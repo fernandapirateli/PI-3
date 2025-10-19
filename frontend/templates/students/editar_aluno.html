@@ -34,13 +34,19 @@
             </select>
             <br>
             <label for="student_age">Idade do aluno (em meses)</label>
-            <input type="text" id="student_age" name="student_age" value="{{student.student_age}}">
+            <input type="number" id="student_age" name="student_age" value="{{student.student_age}}"
+                   placeholder="Ex.: 163">
             <br>
             <label for="student_height">Altura (em centímetros)</label>
-            <input type="text" id="student_height" name="student_height" value="{{student.student_height}}">
+            <input type="number" id="student_height" name="student_height" step="0.01"
+                   oninput="this.value = this.value.replace(/,/g, '.')"
+                   onblur="this.value = this.value.replace(/,/g, '.')"
+                   value="{{student.student_height}}"
+                   placeholder="Ex.: 129.34">
             <br>
             <label for="student_weight">Peso (em gramas)</label>
-            <input type="text" id="student_weight" name="student_weight" value="{{student.student_weight}}">
+            <input type="number" id="student_weight" name="student_weight" value="{{student.student_weight}}"
+                   placeholder="Ex.: 22934">
             <br>
             <input type="text" name="student_id" value="{{student.id}}" hidden>
             <input type="text" name="option" value="editar_salvar" hidden>
