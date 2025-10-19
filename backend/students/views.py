@@ -6,6 +6,13 @@ import numpy as np
 import joblib
 import pandas as pd
 
+import os
+import json
+from django.core.serializers import serialize
+
+
+GLOBAL_LISTA_ALUNOS = []
+
 
 def registrar_turma(group_name):
     """
@@ -157,6 +164,7 @@ def listar_alunos(request):
         HttpResponseRedirect: Redireciona para 'index' se usuário não autenticado
     """
 
+    global GLOBAL_LISTA_ALUNOS
     contexto = gerir_contexto(request)
     lista_alunos = []
 
@@ -169,14 +177,18 @@ def listar_alunos(request):
             lista_alunos = Student.objects.order_by('student_name').filter(student_ra__icontains=search)
     else:
         if contexto['login']:
-            lista_alunos = Student.objects.order_by('student_name').all()
+            if not GLOBAL_LISTA_ALUNOS:
+                lista_alunos = Student.objects.order_by('student_name').all()
 
-            # classificar em tempo real, todos os alunos
-            lista_alunos = [classificar_sujeito(aluno) for aluno in lista_alunos]
+                # classificar em tempo real, todos os alunos
+                GLOBAL_LISTA_ALUNOS = [classificar_sujeito(aluno) for aluno in lista_alunos]
+
+                # salvar em csv e obter dataframe
+                df = salvar_alunos_dataframe_completo(GLOBAL_LISTA_ALUNOS)
         else:
             return redirect('index')
 
-    contexto['lista_alunos'] = lista_alunos
+    contexto['lista_alunos'] = GLOBAL_LISTA_ALUNOS
     return render(request, 'students/listar_alunos.html', contexto)
 
 
@@ -297,5 +309,44 @@ def classificar_sujeito(sujeito):
     # efetuar previsão
     classificacao = model.predict(amostra_scaled)[0]
     sujeito.classification, sujeito.bmi = classificacao, round(imc, 1)
+    print(f"Sujeito {sujeito.student_name} classificado como {sujeito.classification}.")
 
     return sujeito
+
+
+def salvar_alunos_json(alunos_list):
+    # Converte QuerySet para JSON
+    alunos_json = serialize('json', alunos_list)
+
+    file = 'students/management/commands/data/students_data_classified.json'
+    # Salva em arquivo
+    with open(file, 'w', encoding='utf-8') as f:
+        f.write(alunos_json)
+
+    # Cria DataFrame
+    df = pd.read_json(file)
+    return df
+
+
+def salvar_alunos_dataframe_completo(alunos_list):
+    file = 'students/management/commands/data/students_data_classified.csv'
+    data = []
+    for aluno in alunos_list:
+        data.append({
+            'ra': aluno.student_ra,
+            'nome': aluno.student_name,
+            'sala': aluno.student_group,
+            'genero': aluno.student_gender,
+            'idade': aluno.student_age,
+            'altura': aluno.student_height,
+            'peso': aluno.student_weight,
+            'imc': aluno.bmi,  # @property
+            'classificacao': aluno.classification,  # @property
+        })
+
+    df = pd.DataFrame(data)
+
+    df.to_csv(file, encoding='latin1', index=False)
+    # df.to_pickle('alunos_completo.pkl')
+
+    return df
