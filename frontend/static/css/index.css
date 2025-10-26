@@ -389,4 +389,132 @@ select {
 .green { color: #00FF00; }
 .red-light { color: #FF6B6B; }
 .red-dark { color: #FF0000; }
+
+
+.div-relatorio-area {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container do gráfico */
+.div-relatorio-area .grafico-container {
+    width: 100%;
+    height: 100%;
+    margin: 30px 0;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    text-align: center;
+}
+
+/* Imagens dos gráficos */
+.div-relatorio-area .grafico-container img {
+    max-width: 100%;
+    height: auto%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Container do relatório */
+.div-relatorio-area .relatorio-container {
+    width: 100%;
+    margin: 25px 0;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+/* Texto do relatório */
+.div-relatorio-area .relatorio-container pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+}
+
+/* Títulos e cabeçalhos */
+.div-relatorio-area h1,
+.div-relatorio-area h2,
+.div-relatorio-area h3 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.div-relatorio-area h1 {
+    font-size: 2.2rem;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.div-relatorio-area h2 {
+    font-size: 1.8rem;
+    color: #34495e;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .div-relatorio-area {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .div-relatorio-area .grid-graficos {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .div-relatorio-area .grafico-container,
+    .div-relatorio-area .relatorio-container {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .div-relatorio-area h1 {
+        font-size: 1.8rem;
+    }
+
+    .div-relatorio-area h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Melhorias de legibilidade */
+.div-relatorio-area {
+    line-height: 1.6;
+    color: #4a5568;
+}
+
+.div-relatorio-area strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+/* Efeitos de hover suaves */
+.div-relatorio-area .grafico-container:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+img {
+    width: 70%;
+    height: auto;
+}
 </style>

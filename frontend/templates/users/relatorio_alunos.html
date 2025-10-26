@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="container">
+        <div class="div-relatorio-area">
+            <h1>Relatório Nutricional</h1>
+            <div class="grafico-container grafico-grande">
+                {{ grafico_barras|safe }}
+            </div>
+            <div class="relatorio-container">
+                <pre>{{ relatorio_barras }}</pre>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
+import users.analytics as an
 
 User = auth.get_user_model()
 GLOBAL_LOGIN = False
@@ -165,3 +166,17 @@ def deslogar(request):
     GLOBAL_LOGIN = False
     contexto = {'login': GLOBAL_LOGIN}
     return render(request, 'index.html', contexto)
+
+
+def relatorio_alunos(request):
+    contexto = gerir_contexto(request)
+
+    df = an.obter_dataframe()
+
+    # Gera gráfico e relatório
+    imagem_barras, relatorio_barras = an.grafico_barras(df)
+
+    contexto['grafico_barras'] = imagem_barras
+    contexto['relatorio_barras'] = relatorio_barras
+
+    return render(request, 'users/relatorio_alunos.html', contexto)

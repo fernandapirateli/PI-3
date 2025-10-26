@@ -6,11 +6,6 @@ import numpy as np
 import joblib
 import pandas as pd
 
-import os
-import json
-from django.core.serializers import serialize
-
-
 GLOBAL_LISTA_ALUNOS = []
 
 
@@ -314,20 +309,6 @@ def classificar_sujeito(sujeito):
     return sujeito
 
 
-def salvar_alunos_json(alunos_list):
-    # Converte QuerySet para JSON
-    alunos_json = serialize('json', alunos_list)
-
-    file = 'students/management/commands/data/students_data_classified.json'
-    # Salva em arquivo
-    with open(file, 'w', encoding='utf-8') as f:
-        f.write(alunos_json)
-
-    # Cria DataFrame
-    df = pd.read_json(file)
-    return df
-
-
 def salvar_alunos_dataframe_completo(alunos_list):
     file = 'students/management/commands/data/students_data_classified.csv'
     data = []
@@ -345,8 +326,6 @@ def salvar_alunos_dataframe_completo(alunos_list):
         })
 
     df = pd.DataFrame(data)
-
     df.to_csv(file, encoding='latin1', index=False)
-    # df.to_pickle('alunos_completo.pkl')
 
     return df
