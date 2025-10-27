@@ -10,6 +10,24 @@
             <div class="relatorio-container">
                 <pre>{{ relatorio_barras }}</pre>
             </div>
+            <div class="grafico-container grafico-grande">
+                {{ grafico_imc_idade|safe }}
+            </div>
+            <div class="relatorio-container">
+                <pre>{{ relatorio_imc_idade }}</pre>
+            </div>
+            <div class="grafico-container grafico-grande">
+                {{ grafico_dispersao|safe }}
+            </div>
+            <div class="relatorio-container">
+                <pre>{{ relatorio_dispersao }}</pre>
+            </div>
+            <div class="grafico-container grafico-grande">
+                {{ grafico_colunas|safe }}
+            </div>
+            <div class="relatorio-container">
+                <pre>{{ relatorio_colunas }}</pre>
+            </div>
         </div>
     </section>
 {% endblock %}

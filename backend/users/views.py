@@ -175,8 +175,17 @@ def relatorio_alunos(request):
 
     # Gera gráfico e relatório
     imagem_barras, relatorio_barras = an.grafico_barras(df)
+    imagem_imc_idade, relatorio_imc_idade = an.grafico_imc_idade(df)
+    imagem_dispersao, relatorio_dispersao = an.grafico_dispersao(df)
+    imagem_colunas, relatorio_colunas = an.grafico_colunas(df)
 
     contexto['grafico_barras'] = imagem_barras
     contexto['relatorio_barras'] = relatorio_barras
+    contexto['grafico_imc_idade'] = imagem_imc_idade
+    contexto['relatorio_imc_idade'] = relatorio_imc_idade
+    contexto['grafico_dispersao'] = imagem_dispersao
+    contexto['relatorio_dispersao'] = relatorio_dispersao
+    contexto['grafico_colunas'] = imagem_colunas
+    contexto['relatorio_colunas'] = relatorio_colunas
 
     return render(request, 'users/relatorio_alunos.html', contexto)
