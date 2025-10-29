@@ -1,7 +1,8 @@
-# Projeto Integrador III - <i>Contador de Calorias e Macronutrientes</i>
+# Projeto Integrador III / IV - <i>Contador de Calorias e Macronutrientes</i>
 
 ### Sobre
-Webservice de contagem de calorias e macronutrientes. 
+Este é um projeto de Webservice que inclúi contagem de calorias e macronutrientes. Registro de usuários e alunos, com 
+o uso de Aprendizado de Máquina para como ferramenta de classificação e recursos de análise visual.
 
 ### Instruções
 1. Abra um terminal e, na pasta destino, execute o comando ``git clone https://github.com/fernandapirateli/PI-3.git``
@@ -22,6 +23,13 @@ Para popular a tabela de alimentos* basta executar o comando ```python manage.py
 Caso o banco de dados seja em nuvem, pode requerer mais tempo.
 
 Normalmente, essa é uma ação a qual deve ser executada somente uma vez.
+
+### Base de dados de alunos
+
+Para popular a tabela de alunos basta executar o comando ```python manage.py load_students_data```. E então será 
+inserida a base de dados contendo 512 registros. Os quais servem apenas para título de exemplo de uso da plataforma.
+
+Essa é uma ação opcional, a qual pode ser executada uma vez, caso queira já dispor de registros dentro da plataforma.
 
 ### Tabela IBGE de Alimentos 
 Trata-se de uma versão resumida das tabelas de composição nutricional dos alimentos consumidos no Brasil / IBGE.
