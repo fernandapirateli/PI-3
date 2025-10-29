@@ -171,9 +171,14 @@ input:focus{
     margin: 5px auto;
 }
 
-.card_sheet {
+.card_sheet {        
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
     text-align: center;
-    margin: 0;
+	
 }
 
 img {
@@ -468,6 +473,12 @@ select {
 }
 
 
+.grafico-container img {
+    width: 70%;
+    height: auto;
+}
+
+
 /* Responsividade */
 @media (max-width: 768px) {
     .div-relatorio-area {
@@ -513,8 +524,10 @@ select {
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 }
 
-img {
-    width: 70%;
-    height: auto;
+.card_sheet:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 }
+
 </style>
