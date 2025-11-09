@@ -128,7 +128,7 @@ def grafico_imc_idade(df):
     idade_menor_imc = imc_por_idade.loc[imc_por_idade['mean'].idxmin()]
 
     # Gera o relatório em string
-    relatorio = f'''TENDÊNCIAS POR IDADE::
+    relatorio = f'''TENDÊNCIAS POR IDADE:
 
         • Idade com maior IMC médio: {idade_maior_imc['idade']} anos (IMC: {idade_maior_imc['mean']:.1f})
         • Idade com menor IMC médio: {idade_menor_imc['idade']} anos (IMC: {idade_menor_imc['mean']:.1f})
