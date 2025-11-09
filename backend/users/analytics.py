@@ -100,9 +100,9 @@ def grafico_imc_idade(df):
                  linewidth=3, marker='o', markersize=8,
                  color='#2E86AB', label='IMC Médio')
 
-    plt.axhline(y=18.5, color='red', linestyle='--', alpha=0.7, label='Abaixo do Peso')
-    plt.axhline(y=25, color='green', linestyle='--', alpha=0.7, label='Sobrepeso')
-    plt.axhline(y=30, color='orange', linestyle='--', alpha=0.7, label='Obesidade')
+    plt.axhline(y=16, color='red', linestyle='--', alpha=0.7, label='Abaixo do Peso')
+    plt.axhline(y=20, color='green', linestyle='--', alpha=0.7, label='Sobrepeso')
+    plt.axhline(y=25, color='orange', linestyle='--', alpha=0.7, label='Obesidade')
 
     plt.title('Evolução do IMC Médio por Idade',
               fontsize=16, fontweight='bold', pad=20)
@@ -161,10 +161,10 @@ def grafico_dispersao(df):
     # Linhas de referência para IMC (opcional)
     # Criar curvas de IMC constante
     alturas = np.linspace(df['altura'].min(), df['altura'].max(), 50)
-    for imc_val in [18.5, 25, 30]:
+    for imc_val in [16, 20, 25]:
         pesos = imc_val * (alturas ** 2)
         plt.plot(alturas, pesos, 'gray', linestyle=':', alpha=0.5,
-                 label=f'IMC = {imc_val}' if imc_val == 18.5 else "")
+                 label=f'IMC = {imc_val}' if imc_val == 20 else "")
 
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left',
                title='Classificação', title_fontsize=10)
@@ -178,7 +178,7 @@ def grafico_dispersao(df):
     # Estatísticas de correlação
     correlacao = df['altura'].corr(df['peso'])
     df['imc_esperado'] = df['peso'] / (df['altura'] ** 2)
-    outliers = df[(df['imc_esperado'] < 16) | (df['imc_esperado'] > 35)]
+    outliers = df[(df['imc_esperado'] < 12) | (df['imc_esperado'] > 32)]
     interpretacao = 'Forte' if abs(correlacao) > 0.7 else 'Moderada' if abs(correlacao) > 0.5 else 'Fraca'
     # Gera o relatório em string
     relatorio = f'''
