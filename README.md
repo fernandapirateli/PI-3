@@ -5,7 +5,7 @@ Este é um projeto de Webservice que inclúi contagem de calorias e macronutrien
 o uso de Aprendizado de Máquina para como ferramenta de classificação e recursos de análise visual.
 
 ### Instruções
-1. Abra um terminal e, na pasta destino, execute o comando ``git clone https://github.com/fernandapirateli/PI-3.git``
+1. Abra um terminal e, na pasta destino, execute o comando ``git clone https://github.com/ihaveonesun/kalokids_tcc.git``
 2. É recomendável criar e ativar ambiente virtual;
 3. Instale as dependências executando ``pip install -r requirements.txt``
 4. Certifique-se de que o arquivo **.env** esteja dentro do diretório ***backend***. 
